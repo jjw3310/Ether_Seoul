@@ -2,24 +2,20 @@ import { TbBusinessplan } from 'react-icons/tb'
 import { Link } from 'react-router-dom'
 import { connectWallet } from '../services/blockchain'
 import { truncate, useGlobalState } from '../store'
+import BackPageLeft from '../assets/images/BackPageLeft.png';
 
 const Header = () => {
   const [connectedAccount] = useGlobalState('connectedAccount')
 
   return (
     <header
-      className="flex justify-between items-center
-        p-5 bg-white shadow-lg fixed top-0 left-0 right-0"
+      className="flex justify-between items-center p-5"
+      style={{ backgroundColor: "#84A27E" }}
     >
-      <Link
-        to="/"
-        className="flex justify-start items-center
-      text-xl text-black space-x-1"
-      >
-        <span>Genesis</span>
-        <TbBusinessplan />
-      </Link>
-
+    <Link to="/" className="flex justify-start items-center text-xl text-black space-x-1">
+      <img src={BackPageLeft} alt="Back Page Left" />
+    </Link>
+{/* Connection Wallet
       <div className="flex space-x-2 justify-center">
         {connectedAccount ? (
           <button
@@ -41,7 +37,7 @@ const Header = () => {
             Connect Wallet
           </button>
         )}
-      </div>
+      </div> */}
     </header>
   )
 }

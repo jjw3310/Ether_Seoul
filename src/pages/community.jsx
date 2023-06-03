@@ -3,7 +3,7 @@ import PostCard from "@components/molecules/PostCard";
 import PostCategory from "@components/molecules/PostCategory";
 import CreatePostModal from "@components/molecules/CreatePostModal";
 import { ethers } from "ethers";
-import CommunityCont from "@components/communityCont";
+import { COM_CONT_ADDRESS, COMMUNITY_ABI } from "../web3.config";
 import Web3 from "web3";
 
 import { useState, useEffect } from "react";
@@ -13,13 +13,6 @@ import {
   InputGroup,
   Button,
   InputLeftElement,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
@@ -31,7 +24,6 @@ export default function Community({ account }) {
   const [posts, setPosts] = useState([]);
 
   const web3 = new Web3(window.ethereum);
-  const contractAddress = "0x8A24d96bd4638C55aE34bAdd3e821970Ccfc1F25";
 
   const setPostArr = (post) => {
     const postArr = post[0];
@@ -64,8 +56,8 @@ export default function Community({ account }) {
 
   useEffect(() => {
     const contractCommunity = new web3.eth.Contract(
-      CommunityCont,
-      contractAddress
+      COMMUNITY_ABI,
+      COM_CONT_ADDRESS
     );
 
     setContract(contract);

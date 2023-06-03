@@ -36,7 +36,7 @@ code {
   @apply bg-[#F0F1F2];
 }
 .market-prev_btn {
-  @apply absolute z-[1] left-[7%] top-[9%];
+  @apply absolute z-[1] left-[7%] top-[15%];
 }
 .apple-wrapper {
   @apply h-20 flex mr-3 mt-[30px] right-[46%] top-[12%];

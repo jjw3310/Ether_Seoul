@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -39,4 +38,10 @@ module.exports = {
   corePlugins: {
     preflight: false,
   },
+  mode: 'jit',
+  darkMode: false,
+  variants: {
+    extend: {},
+  },
+  plugins: [require('@tailwindcss/forms')],
 };

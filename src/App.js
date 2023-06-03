@@ -12,6 +12,11 @@ import MyPage from "./pages/myPage";
 import { useWeb3 } from "@hooks/useWallet";
 import Market from "./pages/market";
 import MarketItemset from "./pages/marketItemset";
+import Home from './views/Home'
+import Project from './views/Project'
+import { isWallectConnected } from './services/blockchain'
+import { ToastContainer } from 'react-toastify'
+import Footer from './components/Footer'
 
 function App() {
   const [account, setAccount] = useState();
@@ -89,6 +94,8 @@ function App() {
                     element={<Market marketContract={marketContract} />}
                   />
                   <Route path="/marketItemset" element={<MarketItemset />} />
+                  <Route path="/projects" element={<Home />} />
+                   <Route path="/projects/:id" element={<Project />} />
                 </Routes>
                 <br />
                 <br />
@@ -101,6 +108,19 @@ function App() {
             )}
           </div>
         </Flex>
+         <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      <Footer />
       </ChakraProvider>
     </BrowserRouter>
   );

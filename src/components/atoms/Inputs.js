@@ -35,6 +35,7 @@ export default function InputFullsize(props) {
         boxShadow={"inset 0px 3px 10px rgba(0, 0, 0, 0.4)"}
         bgColor={whiteColor}
         color={"#000000"}
+        onChange={props.onChange}
       />
     </Box>
   );

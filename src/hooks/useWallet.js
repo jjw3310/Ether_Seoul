@@ -3,10 +3,10 @@ import Web3 from "web3";
 import {
   BERRY_ABI,
   BER_CONT_ADDRESS,
-  ECOIN_ABI,
-  ECO_CONT_ADDRESS,
-  FERTILIZER_ABI,
-  FER_CONT_ADDRESS,
+  // ECOIN_ABI,
+  // ECO_CONT_ADDRESS,
+  // FERTILIZER_ABI,
+  // FER_CONT_ADDRESS,
   TREE_ABI,
   TRE_CONT_ADDRESS,
   USER_ABI,
@@ -17,8 +17,8 @@ export const useWeb3 = () => {
   const [web3, setWeb3] = useState();
   const [berryContract, setBerryContract] = useState();
   const [treeContract, setTreeContract] = useState();
-  const [fertilizerContract, setFertilizerContract] = useState();
-  const [ecoinContract, setEcoinContract] = useState();
+  // const [fertilizerContract, setFertilizerContract] = useState();
+  // const [ecoinContract, setEcoinContract] = useState();
   const [userContract, setUserContract] = useState();
 
   useEffect(() => {
@@ -33,12 +33,12 @@ export const useWeb3 = () => {
         new web3.eth.Contract(BERRY_ABI, BER_CONT_ADDRESS)
       );
       await setTreeContract(new web3.eth.Contract(TREE_ABI, TRE_CONT_ADDRESS));
-      await setFertilizerContract(
-        new web3.eth.Contract(FERTILIZER_ABI, FER_CONT_ADDRESS)
-      );
-      await setEcoinContract(
-        new web3.eth.Contract(ECOIN_ABI, ECO_CONT_ADDRESS)
-      );
+      // await setFertilizerContract(
+      //   new web3.eth.Contract(FERTILIZER_ABI, FER_CONT_ADDRESS)
+      // );
+      // await setEcoinContract(
+      //   new web3.eth.Contract(ECOIN_ABI, ECO_CONT_ADDRESS)
+      // );
       await setUserContract(new web3.eth.Contract(USER_ABI, USE_CONT_ADDRESS));
     } catch (error) {
       console.error(error);
@@ -51,8 +51,8 @@ export const useWeb3 = () => {
   return {
     berryContract,
     treeContract,
-    fertilizerContract,
-    ecoinContract,
+    // fertilizerContract,
+    // ecoinContract,
     userContract,
     getContracts,
   };

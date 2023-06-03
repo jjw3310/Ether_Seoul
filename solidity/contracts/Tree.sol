@@ -1,35 +1,35 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 
-// import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract Tree is ERC721EnumerableUpgradeable, OwnableUpgradeable {
-    using StringsUpgradeable for string;
+contract Tree is ERC721Enumerable, Ownable {
+    using Strings for string;
     address userContract;
     string metadataBaseURI;
     enum treeName {GREENTREE,REDTREE,PEACHTREE,ORANGETREE, ERROR}
     uint256 public treeLength;
 
-    function initialize(string memory _uri) initializer public {
-        __ERC721_init("TREE", "TRE");
-        __Ownable_init();
-        metadataBaseURI = _uri;
-    }
-
-    function initFunction() public onlyOwner {
+    constructor(string memory _name, string memory _symbol, string memory _uri) ERC721(_name, _symbol) {
         treeLength = uint256(treeName.ERROR);
-        string[] memory idsTemp = new string[](1);
+        metadataBaseURI = _uri;
+        string[] memory idsTemp = new string[](1); 
         uint256[] memory amtTemp = new uint256[](1);
-        idsTemp[0] = "WATER";
-        amtTemp[0] = 0;
+        idsTemp[0] = "GREENAPPLE";
+        amtTemp[0] = 1;
+        // treeEncyclopedia[0] = tree("GREEN_TREE_1",false,string(abi.encodePacked(metadataBaseURI,"0",".json")),"GREENTREE",1,false,"GREENAPPLE",0,0, idsTemp, amtTemp);
+        // treeEncyclopedia[1] = tree("GREEN_TREE_2",false,string(abi.encodePacked(metadataBaseURI,"1",".json")),"GREENTREE",2,false,"GREENAPPLE",0,0, idsTemp, amtTemp);
+        // treeEncyclopedia[2] = tree("GREEN_TREE_3",false,string(abi.encodePacked(metadataBaseURI,"2",".json")),"GREENTREE",3,false,"GREENAPPLE",0,0, idsTemp, amtTemp);
+        // treeEncyclopedia[3] = tree("GREEN_TREE_4",false,string(abi.encodePacked(metadataBaseURI,"3",".json")),"GREENTREE",4,false,"GREENAPPLE",0,0, idsTemp, amtTemp);
+        // treeEncyclopedia[4] = tree("GREEN_TREE_5",false,string(abi.encodePacked(metadataBaseURI,"4",".json")),"GREENTREE",5,true,"GREENAPPLE",30,0, idsTemp, amtTemp);   
+         
         treeEncyclopedia[0] = tree("GREEN_TREE_1",false,string(abi.encodePacked(metadataBaseURI,"0",".json")),"GREENTREE",1,false,"GREENAPPLE",0,0, idsTemp, amtTemp);
         treeEncyclopedia[1] = tree("GREEN_TREE_2",false,string(abi.encodePacked(metadataBaseURI,"1",".json")),"GREENTREE",2,false,"GREENAPPLE",0,0, idsTemp, amtTemp);
         treeEncyclopedia[2] = tree("GREEN_TREE_3",false,string(abi.encodePacked(metadataBaseURI,"2",".json")),"GREENTREE",3,false,"GREENAPPLE",0,0, idsTemp, amtTemp);
         treeEncyclopedia[3] = tree("GREEN_TREE_4",false,string(abi.encodePacked(metadataBaseURI,"3",".json")),"GREENTREE",4,false,"GREENAPPLE",0,0, idsTemp, amtTemp);
-        treeEncyclopedia[4] = tree("GREEN_TREE_5",false,string(abi.encodePacked(metadataBaseURI,"4",".json")),"GREENTREE",5,true,"GREENAPPLE",5,0, idsTemp, amtTemp);   
+        treeEncyclopedia[4] = tree("GREEN_TREE_5",false,string(abi.encodePacked(metadataBaseURI,"4",".json")),"GREENTREE",5,true,"GREENAPPLE",30,0, idsTemp, amtTemp);   
     }
 
     struct tree {
@@ -42,8 +42,10 @@ contract Tree is ERC721EnumerableUpgradeable, OwnableUpgradeable {
         string berryName;
         uint256 berryAmount;
         uint lastHarvestTime;
-        string[] FertilName;
-        uint256[] FertilAmounts;
+        string[] burnBerryName;
+        uint256[] burnBerryAmounts;
+        // string[] FertilName;
+        // uint256[] FertilAmounts;
     }
 
     // uint public totalSupply;
@@ -93,6 +95,7 @@ contract Tree is ERC721EnumerableUpgradeable, OwnableUpgradeable {
             if(unmintedTrees[_addr][i] == _treeId) flag = int(i);
         }
         require(flag > -1, "You don't have that tree");
+        
 
         unmintedTrees[_addr][uint256(flag)] = unmintedTrees[_addr][uint256(flag)] + 1;
     }

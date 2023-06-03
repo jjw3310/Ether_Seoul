@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import HeaderDesktop from "./molecules/HeaderDesktop";
 import HeaderMobile from "./molecules/HeaderMobile";
@@ -15,13 +14,6 @@ const Header = ({ account, setAccount, nickName, windowWidth }) => {
       console.error(error);
     }
   };
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     getCoinPrice();
-  //   }, 4000);
-  //   return () => clearInterval(interval);
-  // }, []);
 
   const [device, setDevice] = useState("Desktop");
   useEffect(() => {

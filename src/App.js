@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import LoginForm from "@components/molecules/LoginForm";
 // import Market from "./pages/market";
 import SignupForm from "@components/molecules/SignUpForm";
-import MyPage from "./pages/myPage";
 import { useWeb3 } from "@hooks/useWallet";
 import Market from "./pages/market";
 import MarketItemset from "./pages/marketItemset";
@@ -23,8 +22,12 @@ function App() {
   useEffect(() => {
     const handleNickname = async () => {
       const userResult = userContract.methods.getUser(account).call();
-      console.log(userResult);
-      setUserNickname(userResult);
+      console.log("userResult : ", userResult);
+      if (userResult.addr === "0x0000000000000000000000000000000000000000") {
+        // Do Nothing
+      } else {
+        setUserNickname(userResult);
+      }
     };
 
     if (userContract && account) {

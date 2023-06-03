@@ -8,13 +8,25 @@ const Header = () => {
   const [connectedAccount] = useGlobalState('connectedAccount')
 
   return (
-    <header
-      className="flex justify-between items-center p-5"
-      style={{ backgroundColor: "#84A27E" }}
-    >
-    <Link to="/" className="flex justify-start items-center text-xl text-black space-x-1">
-      <img src={BackPageLeft} alt="Back Page Left" />
-    </Link>
+    <>
+      <header className="flex justify-between items-center p-10" style={{ backgroundColor: "#84A27E" }}>
+        <div className="flex items-center">
+          <Link to="/" className="flex items-center space-x-1">
+          <img
+  src={BackPageLeft}
+  alt="Back Page Left"
+  className="w-6 h-6 transition-transform duration-300 transform hover:scale-90"
+/>            <h1 className="text-4xl font-semibold font-arial-rounded-mt-bold font-normal text-white leading-6" style={{ marginLeft: '820px' }}>Campaign</h1>
+          </Link>
+        </div>
+      </header>
+    </>
+  )
+}
+
+export default Header
+
+
 {/* Connection Wallet
       <div className="flex space-x-2 justify-center">
         {connectedAccount ? (
@@ -38,8 +50,3 @@ const Header = () => {
           </button>
         )}
       </div> */}
-    </header>
-  )
-}
-
-export default Header

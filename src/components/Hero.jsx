@@ -11,30 +11,32 @@ const Hero = () => {
       >
         <span className="capitalize text-green-600" >Campaign</span>
       </h1>
-      <div className="flex justify-center items-center space-x-2">
-        <button
-          type="button"
-          className="inline-block px-6 py-3 bg-green-600
-          text-white font-medium text-base leading-tight uppercase
-          rounded-lg shadow-md hover:bg-orange-300"
-          style={{ backgroundColor: "#FFC772" }}
-          onMouseEnter={(e) => e.target.style.backgroundColor = "#34D399"}
-          onMouseLeave={(e) => e.target.style.backgroundColor = "#FFC772"}
-          onClick={() => setGlobalState('createModal', 'scale-100')}
-        >
-          Create Campaign
-        </button>
 
-        <div className="flex items-center">
-          <input
-            type="text"
-            placeholder="Search Projects"
-            className="inline-block px-4 py-2.5 border border-green-600
-            font-medium text-xs leading-tight text-green-600
-            rounded-full shadow-md bg-transparent focus:outline-none focus:ring-2 focus:ring-green-600"
-          />
-        </div>
-      </div>
+<div className="flex justify-center items-center space-x-6">
+  <button
+    type="button"
+    className="inline-block px-6 py-3 bg-green-600
+    text-white font-medium text-base leading-tight uppercase
+    rounded-lg shadow-md hover:bg-orange-300"
+    style={{ backgroundColor: "#FFC772" }}
+    onMouseEnter={(e) => e.target.style.backgroundColor = "#34D399"}
+    onMouseLeave={(e) => e.target.style.backgroundColor = "#FFC772"}
+    onClick={() => setGlobalState('createModal', 'scale-100')}
+  >
+    Create Campaign
+  </button>
+
+  <div className="flex items-center">
+    <input
+      type="text"
+      placeholder="Search Projects"
+      className="inline-block px-6 py-3 border border-green-600
+      font-medium text-xs leading-tight text-green-600
+      rounded-lg shadow-md bg-transparent focus:outline-none focus:ring-2 focus:ring-green-600"
+    />
+  </div>
+</div>
+
 
 
 

@@ -21,7 +21,36 @@ export default function Community({ account }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [contract, setContract] = useState(null);
+
+  const [cate, setCate] = useState();
+
   const [posts, setPosts] = useState([]);
+  const [selectedItem, setSelectedItem] = useState([]);
+  const [hashItem, setHashItem] = useState([]);
+
+  useEffect(() => {
+    const tmp =
+      cate === 3 ? posts : posts.filter((post) => parseInt(post.kind) === cate);
+    setSelectedItem(tmp);
+  }, [cate]);
+
+  useEffect(() => {
+    const tmp =
+      cate === ""
+        ? posts
+        : posts.filter((post) => post.hashtag.includes(hashItem));
+    setHashItem(tmp);
+  }, []);
+
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClick();
+    }
+  };
+
+  const onClick = (e) => {
+    console.log(e.target.value);
+  };
 
   const web3 = new Web3(window.ethereum);
 
@@ -52,6 +81,7 @@ export default function Community({ account }) {
     }
 
     setPosts(rst);
+    setSelectedItem(rst);
   };
 
   useEffect(() => {
@@ -76,53 +106,6 @@ export default function Community({ account }) {
   // const signer = provider.getSigner();
   // test용 주소, abi, 컨트랙트 임 (따로 관리할것)
 
-  //const [events, setEvents] = useState([]); ==> 추후 이벤트 쓸지 정할것
-
-  // useEffect(() => {
-  //   // 컨트랙트 객체 초기화
-  //   const initializeContract = async () => {
-  //     try {
-  //       const provider = new ethers.providers.Web3Provider(window.ethereum); // ethers.js Provider 생성
-  //       // let provider;
-  //       // window.ethereum
-  //       //   .enable()
-  //       //   .then(
-  //       //     (provider = new ethers.providers.Web3Provider(window.ethereum))
-  //       //   );
-  //       const signer = provider.getSigner();
-
-  //       const contractAddress = "0x8A24d96bd4638C55aE34bAdd3e821970Ccfc1F25"; // TODO : 커뮤니티 컨트랙트 주소 불러오기(contract 정보 파일)
-
-  //       // 컨트랙트 인스턴스 생성
-  //       const contract = new ethers.Contract(
-  //         contractAddress,
-  //         contractABI,
-  //         signer
-  //       );
-  //       console.log(account);
-  //       // 컨트랙트 객체 상태 업데이트
-  //       setContract(contract);
-
-  //       // 이벤트 구독
-  //       // contract.on("rewardEco", (param1, param2) => {
-  //       //   // 이벤트 발생 시 동작할 로직 작성
-  //       //   console.log("Event MyEvent received:", param1, param2);
-
-  //       //   // 이벤트 추가
-  //       //   setEvents((prevEvents) => [...prevEvents, { param1, param2 }]);
-  //       // });
-  //     } catch (error) {
-  //       console.error("Error initializing contract:", error);
-  //     }
-  //   };
-
-  //   initializeContract();
-  // }, []);
-
-  // useEffect(() => {
-
-  // }, [])
-
   return (
     <Flex
       width={"393px"}
@@ -137,7 +120,13 @@ export default function Community({ account }) {
           <InputLeftElement pointerEvents="none">
             <FaSearch color="gray.300" />
           </InputLeftElement>
-          <Input type="search" placeholder="#HashTag" borderRadius={"3xl"} />
+          <Input
+            type="search"
+            placeholder="#HashTag"
+            borderRadius={"3xl"}
+            //onClick={onclick}
+            //onKeyPress={handleKeyPress}
+          />
         </InputGroup>
         <Button
           borderRadius={"2xl"}
@@ -157,9 +146,9 @@ export default function Community({ account }) {
           account={account}
         />
       </Flex>
-      <PostCategory />
+      <PostCategory cate={cate} setCate={setCate} />
       {/* <PostCard /> */}
-      {posts.map((post) => (
+      {selectedItem.map((post) => (
         <PostCard post={post} key={post.id} />
       ))}
     </Flex>

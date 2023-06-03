@@ -1,19 +1,14 @@
 import { Box, Flex } from "@chakra-ui/react";
+import TreeBox from "@components/molecules/TreeBox";
 import { useWeb3 } from "@hooks/useWallet";
 import { useEffect, useState } from "react";
+import MyPage from "./myPage";
 
 export default function Main({ account }) {
   ///////////////////////////////////////////////////////////////
   //////////////////////// GET CONTRACTS ////////////////////////
   ///////////////////////////////////////////////////////////////
-  const {
-    berryContract,
-    treeContract,
-    fertilizerContract,
-    ecoinContract,
-    userContract,
-    getContracts,
-  } = useWeb3();
+  const { berryContract, treeContract, userContract, getContracts } = useWeb3();
   const [isloading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -54,10 +49,16 @@ export default function Main({ account }) {
   return (
     <>
       {isloading ? (
-        "Loading..."
+        "Main Page Loading..."
       ) : (
         <Flex>
-          <Box w={"100%"}>{}</Box>
+          <Box w={"100%"}>
+            <MyPage
+              account={account}
+              userContract={userContract}
+              treeContract={treeContract}
+            />
+          </Box>
         </Flex>
       )}
     </>

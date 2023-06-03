@@ -3,15 +3,7 @@ import { useState } from "react";
 import {
   Box,
   Flex,
-  Input,
-  InputGroup,
   Button,
-  InputLeftElement,
-  Radio,
-  RadioGroup,
-  useRadio,
-  useRadioGroup,
-  HStack,
   Card,
   CardHeader,
   CardBody,
@@ -22,18 +14,9 @@ import {
   IconButton,
   Image,
 } from "@chakra-ui/react";
-import {
-  FaSearch,
-  FaRegThumbsUp,
-  FaRegCommentAlt,
-  FaEllipsisV,
-  FaRegShareSquare,
-} from "react-icons/fa";
+import { FaRegThumbsUp, FaEllipsisV, FaRegShareSquare } from "react-icons/fa";
 
-export default function PostCard() {
-  const content = `With Chakra UI, I wanted to sync the speed of development with the
-    speed of design. I wanted the developer to be just as excited as the
-    designer to create a screen.`;
+export default function PostCard({ post }) {
   const [showFullContent, setShowFullContent] = useState(false);
 
   const toggleContent = () => {
@@ -45,11 +28,10 @@ export default function PostCard() {
       <CardHeader>
         <Flex spacing="4">
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-            <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
+            <Avatar name={post.userName} src={post.userImgUrl} />
 
             <Box>
-              <Heading size="sm">Segun Adebayo</Heading>
-              <Text>Creator, Chakra UI</Text>
+              <Heading size="sm">{post.userName}</Heading>
             </Box>
           </Flex>
           <IconButton
@@ -62,8 +44,8 @@ export default function PostCard() {
       </CardHeader>
       <CardBody>
         <Text>
-          {showFullContent ? content : content.substr(0, 100)}
-          {content.length > 100 && (
+          {showFullContent ? post.content : post.content.substr(0, 100)}
+          {post.content.length > 100 && (
             <Button
               variant="link"
               colorScheme={"facebook"}
@@ -75,30 +57,18 @@ export default function PostCard() {
           )}
         </Text>
       </CardBody>
-      <Image
-        objectFit="cover"
-        src="https://i.seadn.io/gcs/files/7698f508dcb916208e253c7d677dfa9e.png?auto=format&dpr=1&w=1000"
-        alt="Chakra UI"
-      />
+      <Image objectFit="cover" src={post.imgUrl[0]} alt="Chakra UI" />
 
       <CardFooter
         justify="center"
         flexWrap="wrap"
         padding={"0%"}
-
-        // sx={{
-        //   "& > button": {
-        //     minW: "136px",
-        //   },
         // }}
       >
         <Flex w={"100%"}>
           {" "}
           <Button flex="1" variant="ghost" leftIcon={<FaRegThumbsUp />}>
-            5
-          </Button>
-          <Button flex="1" variant="ghost" leftIcon={<FaRegCommentAlt />}>
-            1
+            {post.likeCnt}
           </Button>
           <Button
             flex="1"

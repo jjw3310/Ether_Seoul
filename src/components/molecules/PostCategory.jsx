@@ -1,25 +1,9 @@
 import React from "react";
 import {
   Box,
-  Flex,
-  Input,
-  InputGroup,
-  Button,
-  InputLeftElement,
-  Radio,
-  RadioGroup,
   useRadio,
   useRadioGroup,
   HStack,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Avatar,
-  Heading,
-  Text,
-  IconButton,
-  Image,
 } from "@chakra-ui/react";
 
 export default function PostCategory() {

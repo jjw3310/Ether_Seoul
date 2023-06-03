@@ -3,6 +3,9 @@ import PostCard from "@components/molecules/PostCard";
 import PostCategory from "@components/molecules/PostCategory";
 import CreatePostModal from "@components/molecules/CreatePostModal";
 import { ethers } from "ethers";
+import CommunityCont from "@components/communityCont";
+import Web3 from "web3";
+
 import { useState, useEffect } from "react";
 import {
   Flex,
@@ -20,11 +23,65 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
+
 export default function Community({ account }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [contract, setContract] = useState(null);
   const [posts, setPosts] = useState([]);
+
+  const web3 = new Web3(window.ethereum);
+  const contractAddress = "0x8A24d96bd4638C55aE34bAdd3e821970Ccfc1F25";
+
+  const setPostArr = (post) => {
+    const postArr = post[0];
+    const UserArr = post[1];
+    const likeArr = post[2];
+    let rst = [];
+    for (let i = 0; i < postArr.length; i++) {
+      if (postArr[i].deleteCheck) continue;
+      let rstPosts = {};
+      rstPosts.id = postArr[i].id;
+      rstPosts.content = postArr[i].content;
+      rstPosts.myId = postArr[i].myId;
+      rstPosts.imgUrl = postArr[i].imgUrl;
+      rstPosts.kind = postArr[i].kind;
+      rstPosts.updateDate = postArr[i].updateDate;
+      rstPosts.writeDate = postArr[i].writeDate;
+      rstPosts.writer = postArr[i].writer;
+      rstPosts.deleteCheck = postArr[i].deleteCheck;
+      rstPosts.hashtag = postArr[i].hashtag;
+      rstPosts.userAddr = UserArr[i].addr;
+      rstPosts.userImgUrl = UserArr[i].imgUrl;
+      rstPosts.userName = UserArr[i].name;
+      rstPosts.likeCnt = likeArr[i];
+
+      rst.push(rstPosts);
+    }
+
+    setPosts(rst);
+  };
+
+  useEffect(() => {
+    const contractCommunity = new web3.eth.Contract(
+      CommunityCont,
+      contractAddress
+    );
+
+    setContract(contract);
+
+    const getAllPosts = async () => {
+      await contractCommunity.methods
+        .getAllPosts()
+        .call({ from: account })
+        .then((rst) => {
+          setPostArr(rst);
+        });
+    };
+    getAllPosts();
+  }, []);
+
+  // const signer = provider.getSigner();
   // test용 주소, abi, 컨트랙트 임 (따로 관리할것)
 
   //const [events, setEvents] = useState([]); ==> 추후 이벤트 쓸지 정할것
@@ -34,15 +91,21 @@ export default function Community({ account }) {
   //   const initializeContract = async () => {
   //     try {
   //       const provider = new ethers.providers.Web3Provider(window.ethereum); // ethers.js Provider 생성
+  //       // let provider;
+  //       // window.ethereum
+  //       //   .enable()
+  //       //   .then(
+  //       //     (provider = new ethers.providers.Web3Provider(window.ethereum))
+  //       //   );
+  //       const signer = provider.getSigner();
 
-  //       const contractAddress = "CONTRACT_ADDRESS"; // TODO : 커뮤니티 컨트랙트 주소 불러오기(contract 정보 파일)
-  //       const contractABI = [{ tmp: true }]; // TODO : 커뮤니티 컨트랙트 ABI 불러오기(contract 정보 파일 생성)
+  //       const contractAddress = "0x8A24d96bd4638C55aE34bAdd3e821970Ccfc1F25"; // TODO : 커뮤니티 컨트랙트 주소 불러오기(contract 정보 파일)
 
   //       // 컨트랙트 인스턴스 생성
   //       const contract = new ethers.Contract(
   //         contractAddress,
   //         contractABI,
-  //         provider.getSigner(account)
+  //         signer
   //       );
   //       console.log(account);
   //       // 컨트랙트 객체 상태 업데이트
@@ -63,8 +126,11 @@ export default function Community({ account }) {
 
   //   initializeContract();
   // }, []);
-  console.log(account);
-  const initializeContract = async () => {};
+
+  // useEffect(() => {
+
+  // }, [])
+
   return (
     <Flex
       width={"393px"}
@@ -72,6 +138,7 @@ export default function Community({ account }) {
       alignItems={"center"}
       gap={"20px"}
       marginTop={"3%"}
+      bg={"black"}
     >
       <Flex gap={"10px"}>
         <InputGroup w={"60%"}>
@@ -94,7 +161,12 @@ export default function Community({ account }) {
         <CreatePostModal isOpen={isOpen} onClose={onClose} />
       </Flex>
       <PostCategory />
-      <PostCard />
+      {/* <PostCard /> */}
+      {posts.map((post) => (
+        <PostCard post={post} key={post.id} />
+      ))}
     </Flex>
   );
 }
+
+//onOpen

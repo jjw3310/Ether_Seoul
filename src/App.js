@@ -79,7 +79,10 @@ function App() {
                   />
                   <Route path="/:tokenId" element={<Customizing />} />
                   <Route path="/login" element={<LoginForm />} />
-                  <Route path="/community" element={<Community />} />
+                  <Route
+                    path="/community"
+                    element={<Community account={account} />}
+                  />
                 </Routes>
                 <br />
                 <br />

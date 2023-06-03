@@ -1,68 +1,65 @@
-import { useState, useEffect } from "react";
-import Intro from "../components/Intro";
+import { Box, Flex } from "@chakra-ui/react";
+import { useWeb3 } from "@hooks/useWallet";
+import { useEffect, useState } from "react";
 
-import Web3 from "web3";
-import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../web3.config";
-import Nfts from "../components/Nfts";
-const web3 = new Web3(window.ethereum);
-const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+export default function Main({ account }) {
+  ///////////////////////////////////////////////////////////////
+  //////////////////////// GET CONTRACTS ////////////////////////
+  ///////////////////////////////////////////////////////////////
+  const {
+    berryContract,
+    treeContract,
+    fertilizerContract,
+    ecoinContract,
+    userContract,
+    getContracts,
+  } = useWeb3();
+  const [isloading, setIsLoading] = useState(true);
 
-console.log(contract);
-const Main = ({ account }) => {
-  const [totalNft, setTotalNft] = useState(0);
-  const [mintedNft, setMintedNft] = useState(0);
-  const [myNft, setMyNft] = useState(0);
-  const [page, setPage] = useState(1);
-  const getTotalNft = async () => {
-    try {
-      if (!contract) return;
-
-      const response = await contract.methods.totalNft().call();
-
-      setTotalNft(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const getMintedNft = async () => {
-    try {
-      if (!contract) return;
-
-      const response = await contract.methods.totalSupply().call();
-
-      setMintedNft(response);
-      //   console.log(response);
-      //   setPage(parseInt((parseInt(response) - 1) / 10) + 1);
-      setPage(Math.floor(parseInt(response - 1) / 3) + 1);
-      //   console.log(page);
-      // 10 - 1 = 9 / 10 = 0 + 1= 1page
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const getMyNft = async () => {
-    try {
-      if (!contract || !account) return;
-      const response = await contract.methods.balanceOf(account).call();
-      console.log("내꺼 : " + response);
-      setMyNft(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   useEffect(() => {
-    getTotalNft();
-    getMintedNft();
-  }, []);
-  useEffect(() => {
-    getMyNft();
-  }, [account]);
+    if (!isloading) return;
+    getContracts();
+    if (userContract) setIsLoading(false);
+  }, [getContracts]);
+  ///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
+  const [user, setUser] = useState();
+  const [myTrees, setMyTrees] = useState();
+
+  useEffect(
+    () => async () => {
+      if (!userContract) return;
+      if (!account) return;
+      // console.log(treeContract);
+      if (userContract) {
+        const resultUser = await userContract.methods.getUser(account).call();
+        setUser(resultUser);
+      }
+      if (treeContract) {
+        const resultTree = await treeContract.methods
+          .getBalanceOfUnmintedTree(account)
+          .call();
+        console.log("resultTree : ", resultTree);
+        await setMyTrees(resultTree);
+        const mintedTree = await treeContract.methods.balanceOf(account).call();
+        console.log("mintedTree :", mintedTree);
+        await setMyTrees(...mintedTree);
+      }
+    },
+    [userContract]
+  );
+
+  ///////////////////////////////////////////////////////////////
+
   return (
     <>
-      <Intro totalNft={totalNft} mintedNft={mintedNft} myNft={myNft} />
-      <Nfts page={page} mintedNft={mintedNft} />
+      {isloading ? (
+        "Loading..."
+      ) : (
+        <Flex>
+          <Box w={"100%"}>{}</Box>
+        </Flex>
+      )}
     </>
   );
-};
-
-export default Main;
+}

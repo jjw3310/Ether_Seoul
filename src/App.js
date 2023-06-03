@@ -1,52 +1,97 @@
-import logo from "./logo.svg";
-
-import { ChakraProvider, Box, Heading, Text, Button } from "@chakra-ui/react";
+import { ChakraProvider, Flex } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "./pages/main";
 import Customizing from "./pages/customizing";
 import Header from "./components/Header";
-import { useState, useRef } from "react";
-// import "./App.css";
-import BoxCompo from "@components/BoxCompo";
-import Nfts from "@components/Nfts";
+import Community from "./pages/community";
+import { useEffect, useState } from "react";
+import LoginForm from "@components/molecules/LoginForm";
+import SignupForm from "@components/molecules/SignUpForm";
+import { useWeb3 } from "@hooks/useWallet";
+
 function App() {
   const [account, setAccount] = useState("");
+  const [userNickName, setUserNickname] = useState();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [currentPage, setCurrentPage] = useState();
+  const { userContract, getContracts } = useWeb3();
+
+  useEffect(() => {
+    const handleNickname = async () => {
+      const userResult = userContract.methods.getUser(account).call();
+      console.log(userResult);
+      setUserNickname(userResult);
+    };
+
+    if (userContract && account) {
+      handleNickname();
+    }
+    if (userContract) return;
+    getContracts();
+  }, [userContract]);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [window.innerWidth]);
+
+  useEffect(() => {
+    const handleUrlChange = () => {
+      setCurrentPage(window.location.href);
+      console.log("href = ", window.location.href);
+    };
+    window.addEventListener("popstate", handleUrlChange);
+    return () => {
+      window.removeEventListener("popstate", handleUrlChange);
+    };
+  }, []);
 
   return (
     <BrowserRouter>
       <ChakraProvider>
-        <div className="min-h-screen bg-gray-950 text-white">
-          <Header account={account} setAccount={setAccount} />
-
-          <Routes>
-            <Route path="/" element={<Main account={account} />} />
-            <Route path="/:tokenId" element={<Customizing />} />
-          </Routes>
-          <div>
-            <div>Hi</div>
-            <BoxCompo />
+        <Flex justifyContent={"center"} height={"100%"} width={"100vw"}>
+          <div className="min-h-screen bg-gray-800 text-white">
+            {!account ? (
+              <LoginForm
+                account={account}
+                setAccount={setAccount}
+                setNickname={setUserNickname}
+                userContract={userContract}
+              />
+            ) : userNickName ? (
+              <>
+                <Header
+                  pageName={currentPage}
+                  account={account}
+                  setAccount={setAccount}
+                  nickName={userNickName}
+                  windowWidth={windowWidth > 768 ? "Desktop" : "Mobile"}
+                />
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<Main account={account} setAccount={setAccount} />}
+                  />
+                  <Route path="/:tokenId" element={<Customizing />} />
+                  <Route path="/login" element={<LoginForm />} />
+                  <Route path="/community" element={<Community />} />
+                </Routes>
+                <br />
+                <br />
+              </>
+            ) : (
+              <Flex direction={"column"}>
+                <Header account={account} setAccount={setAccount} />
+                <SignupForm account={account} setAccount={setAccount} />
+              </Flex>
+            )}
           </div>
-          <Nfts />
-          <Box bg="gray.50" minH="100vh" p={8}>
-            <Box
-              maxW="xl"
-              mx="auto"
-              bg="white"
-              boxShadow="md"
-              rounded="md"
-              p={6}
-            >
-              <Heading size="lg" mb={4}>
-                Welcome to NFT Minting Website
-              </Heading>
-              <Text fontSize="md" mb={6}>
-                Create, sell, and buy unique digital assets with blockchain
-                technology
-              </Text>
-              <Button colorScheme="teal">Get Started</Button>
-            </Box>
-          </Box>
-        </div>
+        </Flex>
       </ChakraProvider>
     </BrowserRouter>
   );

@@ -14,7 +14,7 @@ import MarketItemset from "./pages/marketItemset";
 
 function App() {
   const [account, setAccount] = useState();
-  const [userNickName, setUserNickname] = useState();
+  const [userNickName, setUserNickname] = useState("s");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentPage, setCurrentPage] = useState();
   const { userContract, marketContract, getContracts } = useWeb3();

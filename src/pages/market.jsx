@@ -43,6 +43,7 @@ const Market = ({ marketContract }) => {
       //   method: "eth_requestAccounts",
       // });
       // setAccount(accounts[0]);
+      // const userResult = await marketContract.methods.getItemList().call();
       const userResult = await marketContract.methods.getItemList().call();
       console.log(userResult);
       // await setNickname(userResult.name);
@@ -100,7 +101,7 @@ const Market = ({ marketContract }) => {
           <Image src={banner} w={"100%"} className="banner_point" />
         </div>
         <div className="flex item">
-          <button>ll</button>
+          <Image src={itemsImg} />
         </div>
 
         {/* <div>

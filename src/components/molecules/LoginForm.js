@@ -51,9 +51,9 @@ export default function LoginForm({
     if (ethereum && ethereum.isMetaMask) {
       console.log("Ethereum successfully detected!");
       // Access the decentralized web!
-      navigateToPurchase();
     } else {
       console.log("Please install MetaMask!");
+      navigateToPurchase();
     }
   }
   return (

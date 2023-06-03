@@ -25,12 +25,10 @@ const SignupForm = ({ account, setUserNickname }) => {
 
   const handleNicknameChange = (event) => {
     setNickname(event.target.value);
-    console.log(nickname);
   };
 
   const handleProfileImgUrlChange = (event) => {
     setProfileImgUrl(event.target.value);
-    console.log(profileImgUrl);
   };
 
   const handleSubmit = (event) => {

@@ -1,14 +1,25 @@
-const { override, addWebpackAlias, addBabelPlugins } = require("customize-cra");
-const path = require("path");
+// This file is included to deal with issues regarding react-scripts v5.0.0 and web3
+// Provided from Web3 documentation -> https://github.com/ChainSafe/web3.js#troubleshooting-and-known-issues
 
-module.exports = override(
-  addWebpackAlias({
-    "@components": path.resolve(__dirname, "src", "components"),
-    "@assets": path.resolve(__dirname, "src", "assets"),
-    "@config": path.resolve(__dirname, "src", "config"),
-    "@hooks": path.resolve(__dirname, "src", "hooks"),
-    "@contexts": path.resolve(__dirname, "src", "contexts"),
-  }),
+const webpack = require('webpack');
 
-  addBabelPlugins(["babel-plugin-styled-components"])
-);
+module.exports = function override(config) {
+    const fallback = config.resolve.fallback || {};
+    Object.assign(fallback, {
+        "crypto": require.resolve("crypto-browserify"),
+        "stream": require.resolve("stream-browserify"),
+        "assert": require.resolve("assert"),
+        "http": require.resolve("stream-http"),
+        "https": require.resolve("https-browserify"),
+        "os": require.resolve("os-browserify"),
+        "url": require.resolve("url")
+    })
+    config.resolve.fallback = fallback;
+    config.plugins = (config.plugins || []).concat([
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
+            Buffer: ['buffer', 'Buffer']
+        })
+    ])
+    return config;
+}

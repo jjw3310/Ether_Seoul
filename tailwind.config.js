@@ -1,42 +1,35 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  mode: 'jit',
+  darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      display: ['Open Sans', 'sans-serif'],
+      body: ['Open Sans', 'sans-serif'],
+    },
     extend: {
-      colors: {
-        whitesmoke: {
-          100: "#f0f1f2",
-          200: "#ececec",
-        },
-        black: "#000",
-        white: "#fff",
-        goldenrod: "#f4d153",
-        darkolivegreen: {
-          100: "#678362",
-          200: "#31673d",
-        },
-        darkseagreen: "#84a27e",
-        dimgray: "#556857",
-        gray: {
-          100: "rgba(255, 255, 255, 0.7)",
-          200: "rgba(255, 255, 255, 0.8)",
+      screens: {
+        mf: '990px',
+      },
+      keyframes: {
+        'slide-in': {
+          '0%': {
+            '-webkit-transform': 'translateX(120%)',
+            transform: 'translateX(120%)',
+          },
+          '100%': {
+            '-webkit-transform': 'translateX(0%)',
+            transform: 'translateX(0%)',
+          },
         },
       },
-      fontFamily: {
-        "arial-rounded-mt-bold": "'Arial Rounded MT Bold'",
-        "balsamiq-sans": "'Balsamiq Sans'",
-      },
-      borderRadius: {
-        "10xs": "3px",
-        "8xs": "5px",
+      animation: {
+        'slide-in': 'slide-in 0.5s ease-out',
       },
     },
-    fontSize: {
-      xs: "12px",
-      xl: "20px",
-    },
   },
-  corePlugins: {
-    preflight: false,
+  variants: {
+    extend: {},
   },
-};
+  plugins: [require('@tailwindcss/forms')],
+}

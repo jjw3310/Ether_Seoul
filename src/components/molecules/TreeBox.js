@@ -1,7 +1,6 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import { mainGreenColor, yellowColor } from "@components/atoms/Colors";
 import React, { useEffect, useState } from "react";
-import GREENTREE1 from "@assets/images/tree/GREENTREE1.png";
 import { sub2GreenColor } from "@components/atoms/Colors";
 import axios from "axios";
 
@@ -20,6 +19,7 @@ export default function TreeBox({
     if (!treeContract) return;
     const getTreeInfo = async () => {
       const resultInfo = await treeContract.methods.getTreeInfo(tokenId).call();
+      console.log(resultInfo);
       const result = await axios.get(resultInfo.metadataUri);
       setResult(result.data.properties.image.description);
       setTreeInfo(resultInfo);
@@ -104,7 +104,7 @@ export default function TreeBox({
               </Flex>
             </Flex>
             <Flex direction={"row"}>
-              <Box mb={"35px"}>
+              <Box mb={"15px"}>
                 <Text fontSize={"12px"}>
                   {currentTokenId >= 1000
                     ? `#${currentTokenId}`
@@ -112,6 +112,11 @@ export default function TreeBox({
                 </Text>
               </Box>
             </Flex>
+            <Box>
+              {treeInfo
+                ? `${treeInfo.burnBerryName} : ${treeInfo.burnBerryAmounts}`
+                : ""}
+            </Box>
             {treeInfo ? (
               treeInfo.level === "5" && currentTokenId < 1000 ? (
                 <Box>

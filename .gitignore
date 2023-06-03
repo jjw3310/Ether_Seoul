@@ -24,3 +24,18 @@ yarn-error.log*
 
 .env
 .history
+
+/solidity/contracts/artifacts
+/solidity/artifacts
+.deps
+
+coverage
+coverage.json
+typechain
+typechain-types
+
+# Hardhat files
+cache
+/solidity/node_modules
+/solidity/.env
+/solidity/.openzeppelin/

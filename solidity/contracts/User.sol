@@ -19,6 +19,8 @@ contract User {
     //     ftContract = Fertilizer(_ft);
     // }
     constructor(address _berry, address _tree) {
+        users.push(user(address(0),"Please Sign Up","",0));
+        userMap[address(this)] = 0;
         berryContract = Berry(_berry);
         treeContract = Tree(_tree);
     }
@@ -41,6 +43,7 @@ contract User {
     }
 
     function getUser(address _addr) public view returns(user memory) {
+        
         return users[userMap[_addr]];
     }
 

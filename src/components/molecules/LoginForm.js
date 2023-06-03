@@ -18,7 +18,11 @@ export default function LoginForm({
       setAccount(accounts[0]);
       const userResult = await userContract.methods.getUser(accounts[0]).call();
       console.log(userResult);
-      await setNickname(userResult.name);
+      if (userResult.addr === "0x0000000000000000000000000000000000000000") {
+        // Do Nothing
+      } else {
+        await setNickname(userResult.name);
+      }
     } catch (error) {
       console.error(error);
     }

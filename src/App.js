@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Community from "./pages/community";
 import { useEffect, useState } from "react";
 import LoginForm from "@components/molecules/LoginForm";
-import Market from "./pages/market";
+// import Market from "./pages/market";
 import SignupForm from "@components/molecules/SignUpForm";
 import MyPage from "./pages/myPage";
 import { useWeb3 } from "@hooks/useWallet";
@@ -83,7 +83,7 @@ function App() {
                   <Route path="/:tokenId" element={<Customizing />} />
                   <Route path="/login" element={<LoginForm />} />
                   <Route path="/community" element={<Community />} />
-                  <Route path="/market" element={<Market />} />
+                  {/* <Route path="/market" element={<Market />} /> */}
                   <Route
                     path="/mypage"
                     element={<MyPage account={account} />}

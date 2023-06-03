@@ -32,7 +32,7 @@ export default function TreeBox({
       .harvest(currentTokenId)
       .send({ from: account });
     console.log(hResult);
-    setBalance(balance.paserInt() + hResult);
+    setBalance(balance.parseInt() + hResult);
   };
 
   const growBtnClick = async () => {

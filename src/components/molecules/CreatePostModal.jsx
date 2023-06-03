@@ -47,30 +47,6 @@ export default function CreatePostModal({
     setContent(inputValue);
   };
 
-  async function uploadIpfs() {
-    try {
-      for (let i = 0; i < selectedFiles.length; i++) {
-        const file = selectedFiles[i];
-        const fileAdded = await ipfs.add(file);
-        const ipfsPath = fileAdded.path;
-        // setIpfsHash(ipfsPath);
-        console.log("IPFS path:", ipfsPath);
-      }
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
-  }
-
-  const please = async () => {
-    //uploadIpfs();
-    //UploadPost();
-    console.log(category);
-    console.log(content);
-    console.log(selectedFiles);
-    console.log(content.match(/#[^\s#]*/g));
-    console.log(getToday());
-  };
-
   const UploadPost = async () => {
     //if (category === "" || content.length === 0) return;
     let tmp = [];
@@ -86,6 +62,7 @@ export default function CreatePostModal({
       .send({ from: account })
       .then((rst) => {
         console.log(rst);
+        testClose();
       });
 
     // console.log(nameRef.current.value);

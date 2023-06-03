@@ -20,8 +20,8 @@ contract Berry is ERC1155, Ownable {
         berryLength = uint256(berryName.ERROR);
     }
 
-    uint256[] initBerryId = [uint256(berryName.REDAPPLE), uint256(berryName.PEACH), uint256(berryName.ORANGE)];
-    uint256[] initBerryAmt = [1,1,1];
+    uint256[] initBerryId = [uint256(berryName.GREENAPPLE), uint256(berryName.REDAPPLE), uint256(berryName.PEACH), uint256(berryName.ORANGE)];
+    uint256[] initBerryAmt = [5,1,1,1];
 
     function setUserContract(address _userContractAddress) public onlyOwner {
         userContract = _userContractAddress;

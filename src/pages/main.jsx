@@ -57,6 +57,7 @@ export default function Main({ account }) {
               account={account}
               userContract={userContract}
               treeContract={treeContract}
+              berryContract={berryContract}
             />
           </Box>
         </Flex>

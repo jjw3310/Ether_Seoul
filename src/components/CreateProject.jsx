@@ -3,6 +3,8 @@ import { FaTimes } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { createProject } from '../services/blockchain'
 import { useGlobalState, setGlobalState } from '../store'
+import CreateCampaignIcon from '../assets/images/CreateCampaignIcon.png';
+
 
 const CreateProject = () => {
   const [createModal] = useGlobalState('createModal')
@@ -155,6 +157,7 @@ const CreateProject = () => {
           <div
             className="flex justify-between items-center
           bg-gray-300 rounded-xl mt-5"
+          
           >
             <textarea
               className="block w-full bg-transparent
@@ -170,13 +173,25 @@ const CreateProject = () => {
           </div>
 
           <button
-            type="submit"
-            className="inline-block px-6 py-2.5 bg-green-600
-            text-white font-medium text-md leading-tight
-            rounded-full shadow-md hover:bg-green-700 mt-5"
-          >
-            Submit Project
-          </button>
+  type="submit"
+  className="inline-flex items-center px-6 py-4 bg-green-600
+    text-white font-medium text-md leading-tight
+    rounded-full shadow-md hover:bg-green-700 mt-5"
+  style={{ borderRadius: "10px" }}
+
+>
+  <img
+    src={CreateCampaignIcon}
+    alt="Icon"
+    className="w-6 h-6 mr-2"
+
+  />
+  <div   style={{ marginLeft: '240px'}}
+  >
+  Create Campaign
+  </div>
+</button>
+
         </form>
       </div>
     </div>

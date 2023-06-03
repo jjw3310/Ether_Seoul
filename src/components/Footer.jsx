@@ -10,6 +10,12 @@ import BottomConversation from '../assets/images/BottomConversation.png';
 import BottomCampaign from '../assets/images/BottomCampaign.png';
 import BottomMarket from '../assets/images/BottomMarket.png';
 
+import BottomHouseHover from '../assets/images/BottomHouseHover.png';
+import BottomTreeHover from '../assets/images/BottomTreeHover.png';
+import BottomConversationHover from '../assets/images/BottomConversationHover.png';
+import BottomCampaignHover from '../assets/images/BottomCampaignHover.png';
+import BottomMarketHover from '../assets/images/BottomMarketHover.png';
+
 function Footer() {
   const [selectedIcon, setSelectedIcon] = useState(null);
   const navigate = useNavigate();
@@ -19,56 +25,92 @@ function Footer() {
     navigate(`/${iconName}`);
   };
 
+  const getIconImage = (iconName) => {
+    if (selectedIcon === iconName) {
+      // Return hover state image for the selected icon
+      switch (iconName) {
+        case 'house':
+          return BottomHouseHover;
+        case 'tree':
+          return BottomTreeHover;
+        case 'conversation':
+          return BottomConversationHover;
+        case 'campaign':
+          return BottomCampaignHover;
+        case 'market':
+          return BottomMarketHover;
+        default:
+          return null;
+      }
+    } else {
+      // Return normal state image for the icon
+      switch (iconName) {
+        case 'house':
+          return BottomHouse;
+        case 'tree':
+          return BottomTree;
+        case 'conversation':
+          return BottomConversation;
+        case 'campaign':
+          return BottomCampaign;
+        case 'market':
+          return BottomMarket;
+        default:
+          return null;
+      }
+    }
+  };
+
   return (
-    <header className="flex justify-between items-center p-10" style={{ backgroundColor: "#84A27E" }}>
-    <div className="flex items-center space-x-4 flex-grow-1">
+    <footer className="fixed bottom-0 left-0 right-0 flex justify-between items-center p-5" style={{ backgroundColor: "#84A27E" }}>
+      <div className="flex items-center space-x-4 flex-grow-1">
         <img
-          src={BottomHouse}
+          src={getIconImage('house')}
           alt="Bottom House"
-          className={`w-9 h-9 cursor-pointer ${selectedIcon === 'house' ? 'text-blue-500' : 'text-white'}`}
+          className="w-9 h-9 cursor-pointer"
           onClick={() => handleIconClick('house')}
           style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
           onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
           onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
         />
         <img
-          src={BottomTree}
+          src={getIconImage('tree')}
           alt="Bottom Tree"
-          className={`w-9 h-9 cursor-pointer ${selectedIcon === 'tree' ? 'text-blue-500' : 'text-white'}`}
+          className="w-9 h-9 cursor-pointer"
           onClick={() => handleIconClick('tree')}
           style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
           onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
           onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
         />
         <img
-          src={BottomConversation}
+          src={getIconImage('conversation')}
           alt="Bottom Conversation"
-          className={`w-9 h-9 cursor-pointer ${selectedIcon === 'conversation' ? 'text-blue-500' : 'text-white'}`}
+          className="w-9 h-9 cursor-pointer"
           onClick={() => handleIconClick('conversation')}
           style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
           onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
           onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
         />
         <img
-          src={BottomCampaign}
+          src={getIconImage('campaign')}
           alt="Bottom Campaign"
-          className={`w-9 h-9 cursor-pointer ${selectedIcon === 'campaign' ? 'text-blue-500' : 'text-white'}`}
+          className="w-9 h-9 cursor-pointer"
           onClick={() => handleIconClick('campaign')}
           style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
           onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
           onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
         />
         <img
-          src={BottomMarket}
+          src={getIconImage('market')}
           alt="Bottom Market"
-          className={`w-9 h-9 cursor-pointer ${selectedIcon === 'market' ? 'text-blue-500' : 'text-white'}`}
+          className="w-9 h-9 cursor-pointer"
           onClick={() => handleIconClick('market')}
           style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
           onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
           onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
         />
       </div>
-    </header>
+    </footer>
   );
 }
 

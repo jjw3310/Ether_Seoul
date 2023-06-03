@@ -59,7 +59,7 @@ function App() {
       <ChakraProvider>
         <Flex justifyContent={"center"} height={"100%"} width={"100vw"}>
           <div className="min-h-screen bg-gray-800 text-white">
-            {/* {!account ? (
+            {!account ? (
               <LoginForm
                 account={account}
                 setAccount={setAccount}
@@ -98,26 +98,7 @@ function App() {
                 <Header account={account} setAccount={setAccount} />
                 <SignupForm account={account} setAccount={setAccount} />
               </Flex>
-            )} */}
-            <Header
-              pageName={currentPage}
-              account={account}
-              setAccount={setAccount}
-              nickName={userNickName}
-              windowWidth={windowWidth > 768 ? "Desktop" : "Mobile"}
-            />
-            <Routes>
-              <Route
-                path="/"
-                element={<Main account={account} setAccount={setAccount} />}
-              />
-              <Route path="/:tokenId" element={<Customizing />} />
-              <Route path="/login" element={<LoginForm />} />
-              <Route
-                path="/community"
-                element={<Community account={account} />}
-              />
-            </Routes>
+            )}
           </div>
         </Flex>
       </ChakraProvider>

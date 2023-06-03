@@ -141,7 +141,7 @@ export default function Community({ account }) {
             type="search"
             placeholder="#HashTag"
             borderRadius={"3xl"}
-            value={inputValue}
+            value={tag}
             onKeyPress={handleKeyPress}
             onChange={handleChange}
           />

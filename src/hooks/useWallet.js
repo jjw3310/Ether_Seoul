@@ -11,6 +11,8 @@ import {
   TRE_CONT_ADDRESS,
   USER_ABI,
   USE_CONT_ADDRESS,
+  MARKET_ABI,
+  MARKET_ADDRESS,
 } from "../web3.config.js";
 
 export const useWeb3 = () => {
@@ -20,7 +22,7 @@ export const useWeb3 = () => {
   const [fertilizerContract, setFertilizerContract] = useState();
   const [ecoinContract, setEcoinContract] = useState();
   const [userContract, setUserContract] = useState();
-
+  const [marketContract, setMarketContract] = useState();
   useEffect(() => {
     if (!window.ethereum) return;
     setWeb3(new Web3(window.ethereum));
@@ -40,6 +42,9 @@ export const useWeb3 = () => {
         new web3.eth.Contract(ECOIN_ABI, ECO_CONT_ADDRESS)
       );
       await setUserContract(new web3.eth.Contract(USER_ABI, USE_CONT_ADDRESS));
+      await setMarketContract(
+        new web3.eth.Contract(MARKET_ABI, MARKET_ADDRESS)
+      );
     } catch (error) {
       console.error(error);
     }
@@ -54,6 +59,7 @@ export const useWeb3 = () => {
     fertilizerContract,
     ecoinContract,
     userContract,
+    marketContract,
     getContracts,
   };
 };

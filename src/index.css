@@ -11,7 +11,64 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
+@import url("https://fonts.googleapis.com/css2?family=Arial+Rounded+MT+Bold:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.market {
+  @apply w-full h-14 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-center relative flex left-0;
+  background: #84a27e;
+}
+.marketfont {
+  @apply left-[calc(50%_-_67px/2)] top-[calc(50%_-_23px/2_-_0.5px)] not-italic font-normal text-xl leading-[23px] text-white absolute text-[large] right-[40%] top-[30%];
+  font-family: "Arial Rounded MT Bold";
+}
+.apple {
+  @apply gap-[3px] flex h-[25px] left-[150%] bottom-2.5;
+  /* top: 120px; */
+}
+.full-h {
+  @apply h-screen bg-[#F0F1F2];
+}
+.market-background {
+  @apply bg-[#F0F1F2];
+}
+.market-prev_btn {
+  @apply absolute z-[1] left-[7%] top-[9%];
+}
+.apple-wrapper {
+  @apply h-20 flex mr-3 mt-[30px] right-[46%] top-[12%];
+  justify-content: right;
+  height: 3rem;
+}
+
+.apple-balance {
+  @apply w-[70px] h-[22.5px] top-[calc(50%_-_22.5px/2_-_290.75px)] shadow-[inset_0px_4px_4px_rgba(0,0,0,0.25)] rounded-[3px] left-[293px];
+  background: #ffffff;
+}
+
+.searchBox {
+  @apply justify-center left-[5%] top-[8%];
+  position: unset !important;
+}
+.searchColor {
+  @apply bg-[white] text-[black];
+}
+
+.banner {
+  @apply absolute h-[130px] w-[85%] shadow-[inset_0px_4px_4px_rgba(0,0,0,0.25)] rounded-lg;
+  background: #31673d;
+  width: 100%;
+  margin-top: 8%;
+  background-color: #f0f1f2;
+}
+
+.banner_point {
+  cursor: pointer;
+}
+.item {
+  @apply w-[161px] h-[204px] shadow-[inset_0px_4px_4px_rgba(0,0,0,0.25)] ml-[15px] mt-[300px] mb-[50px] rounded-lg left-[15%] top-[28%];
+  background: #ececec;
+}

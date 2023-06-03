@@ -8,14 +8,16 @@ import { useEffect, useState } from "react";
 import LoginForm from "@components/molecules/LoginForm";
 import SignupForm from "@components/molecules/SignUpForm";
 import { useWeb3 } from "@hooks/useWallet";
+import Market from "./pages/market";
+import MarketItemset from "./pages/marketItemset";
 
 function App() {
-  const [account, setAccount] = useState("");
-  const [userNickName, setUserNickname] = useState();
+  const [account, setAccount] = useState("s");
+  const [userNickName, setUserNickname] = useState("ss");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentPage, setCurrentPage] = useState();
-  const { userContract, getContracts } = useWeb3();
-
+  const { userContract, marketContract, getContracts } = useWeb3();
+  // const { marketContract, getContracts } = useWeb3();
   useEffect(() => {
     const handleNickname = async () => {
       const userResult = userContract.methods.getUser(account).call();
@@ -80,6 +82,11 @@ function App() {
                   <Route path="/:tokenId" element={<Customizing />} />
                   <Route path="/login" element={<LoginForm />} />
                   <Route path="/community" element={<Community />} />
+                  <Route
+                    path="/market"
+                    element={<Market marketContract={marketContract} />}
+                  />
+                  <Route path="/marketItemset" element={<MarketItemset />} />
                 </Routes>
                 <br />
                 <br />

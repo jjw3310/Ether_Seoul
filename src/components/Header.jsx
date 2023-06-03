@@ -9,14 +9,22 @@ const Header = () => {
 
   return (
     <>
-      <header className="flex justify-between items-center p-10" style={{ backgroundColor: "#84A27E" }}>
-        <div className="flex items-center">
-          <Link to="/" className="flex items-center space-x-1">
-            <img src={BackPageLeft} alt="Back Page Left" className="w-6 h-6 transition-transform duration-300 transform hover:scale-90" />            
-            <h1 className="text-4xl font-semibold font-arial-rounded-mt-bold font-normal text-white leading-6" style={{ marginLeft: '520px' }}>Campaign</h1>
-          </Link>
-        </div>
-      </header>
+<header className="flex justify-between items-center p-10" style={{ backgroundColor: "#84A27E" }}>
+  <div className="flex items-center">
+    <Link to="/" className="flex items-center">
+      <div className="flex items-center justify-start">
+        <img src={BackPageLeft} alt="Back Page Left" className="w-6 h-6" />            
+      </div>
+    </Link>
+    <div className="flex items-center justify-center flex-1">
+      <h1 className="text-4xl font-semibold font-arial-rounded-mt-bold font-normal text-white leading-6 mx-auto" style={{ marginLeft: "800px" }}>Campaign</h1>
+    </div>
+  </div>
+</header>
+
+
+
+
     </>
   )
 }

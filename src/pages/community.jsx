@@ -27,6 +27,7 @@ export default function Community({ account }) {
   const [posts, setPosts] = useState([]);
   const [selectedItem, setSelectedItem] = useState([]);
   const [hashItem, setHashItem] = useState([]);
+  const [tag, setTag] = useState();
 
   useEffect(() => {
     const tmp =
@@ -41,16 +42,32 @@ export default function Community({ account }) {
         : posts.filter((post) => post.hashtag.includes(hashItem));
     setHashItem(tmp);
   }, []);
-
-  const onKeyPress = (e) => {
-    if (e.key === "Enter") {
-      onClick();
+  //
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      yourFunction();
     }
   };
 
-  const onClick = (e) => {
-    console.log(e.target.value);
+  const yourFunction = () => {
+    console.log("Entered value:", tag);
   };
+
+  const handleChange = (event) => {
+    setTag(event.target.value);
+  };
+  //
+  // const handleKeyPress = (event) => {
+  //   if (event.key === "Enter") {
+  //     // 엔터를 눌렀을 때 실행할 함수 호출
+  //     yourFunction();
+  //   }
+  // };
+
+  // const yourFunction = () => {
+  //   // 실행할 함수의 로직을 작성하세요
+  //   console.log("Enter key pressed");
+  // };
 
   const web3 = new Web3(window.ethereum);
 
@@ -124,8 +141,9 @@ export default function Community({ account }) {
             type="search"
             placeholder="#HashTag"
             borderRadius={"3xl"}
-            //onClick={onclick}
-            //onKeyPress={handleKeyPress}
+            value={inputValue}
+            onKeyPress={handleKeyPress}
+            onChange={handleChange}
           />
         </InputGroup>
         <Button

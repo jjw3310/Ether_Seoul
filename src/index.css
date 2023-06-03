@@ -36,7 +36,7 @@ code {
   @apply bg-[#F0F1F2];
 }
 .market-prev_btn {
-  @apply absolute z-[1] left-[7%] top-[15%];
+  @apply absolute z-[1] left-[7%] top-[11.5%];
 }
 .apple-wrapper {
   @apply h-20 flex mr-3 mt-[30px] right-[46%] top-[12%];
@@ -69,6 +69,6 @@ code {
   cursor: pointer;
 }
 .item {
-  @apply w-[161px] h-[204px] shadow-[inset_0px_4px_4px_rgba(0,0,0,0.25)] ml-[15px] mt-[300px] mb-[50px] rounded-lg left-[15%] top-[28%];
+  @apply w-[161px] h-[204px] shadow-[inset_0px_4px_4px_rgba(0,0,0,0.25)] ml-[15px] mt-[270px] mb-[50px] rounded-lg left-[15%] top-[28%];
   background: #ececec;
 }

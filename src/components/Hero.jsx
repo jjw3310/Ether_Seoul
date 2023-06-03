@@ -67,7 +67,7 @@ const Hero = () => {
           <button className="px-4 py-2 bg-[#678362] rounded-lg text-white font-medium hover:bg-[#84A27E]">
             Challenges
           </button>
-          <button className="px-4 py-2 bg-[#84A27E] rounded-lg text-white font-medium hover:bg-yellow-400">
+          <button className="px-4 py-2 bg-[#84A27E] rounded-lg text-white font-medium hover:bg-[#556857]">
             Donate
           </button>
         </div>

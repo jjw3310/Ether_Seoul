@@ -4,11 +4,6 @@ import { Link } from "react-router-dom";
 import { truncate, daysRemaining } from "../store";
 import { FaEthereum } from "react-icons/fa";
 
-
-
-
-
-
 const Projects = ({ projects }) => {
   const [end, setEnd] = useState(4);
   const [count] = useState(4);
@@ -21,7 +16,7 @@ const Projects = ({ projects }) => {
   }, [projects, end]);
 
   return (
-<div className="flex flex-col px-6 " style={{ backgroundColor: "#F0F1F2", paddingTop: "20px", paddingBottom: "20px" }}>
+<div className="flex flex-col px-6 " style={{ backgroundColor: "#F0F1F2", paddingTop: "20px", paddingBottom: "100px" }}>
 
       <div className="flex justify-center items-center flex-wrap">
         {collection.map((project, i) => (

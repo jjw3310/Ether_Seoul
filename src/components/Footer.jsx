@@ -62,55 +62,63 @@ function Footer() {
   };
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 flex justify-between items-center p-5" style={{ backgroundColor: "#84A27E" }}>
-      <div className="flex items-center space-x-4 flex-grow-1">
-        <img
-          src={getIconImage('house')}
-          alt="Bottom House"
-          className="w-9 h-9 cursor-pointer"
-          onClick={() => handleIconClick('house')}
-          style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
-          onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-          onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-        />
-        <img
-          src={getIconImage('tree')}
-          alt="Bottom Tree"
-          className="w-9 h-9 cursor-pointer"
-          onClick={() => handleIconClick('tree')}
-          style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
-          onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-          onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-        />
-        <img
-          src={getIconImage('conversation')}
-          alt="Bottom Conversation"
-          className="w-9 h-9 cursor-pointer"
-          onClick={() => handleIconClick('conversation')}
-          style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
-          onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-          onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-        />
-        <img
-          src={getIconImage('campaign')}
-          alt="Bottom Campaign"
-          className="w-9 h-9 cursor-pointer"
-          onClick={() => handleIconClick('campaign')}
-          style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
-          onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-          onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-        />
-        <img
-          src={getIconImage('market')}
-          alt="Bottom Market"
-          className="w-9 h-9 cursor-pointer"
-          onClick={() => handleIconClick('market')}
-          style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
-          onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-          onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-        />
+    <>
+      {/* 페이지 컨텐츠를 포함하는 레이아웃 요소 */}
+      <div className="page-content">
+        {/* 페이지 내용 */}
       </div>
-    </footer>
+
+      {/* 푸터 */}
+      <footer className="fixed bottom-0 left-0 right-0 flex justify-between items-center p-5" style={{ backgroundColor: "#84A27E", zIndex: 999 }}>
+        <div className="flex items-center space-x-4 flex-grow-1">
+          <img
+            src={getIconImage('house')}
+            alt="Bottom House"
+            className="w-9 h-9 cursor-pointer"
+            onClick={() => handleIconClick('house')}
+            style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
+            onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
+            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+          />
+          <img
+            src={getIconImage('tree')}
+            alt="Bottom Tree"
+            className="w-9 h-9 cursor-pointer"
+            onClick={() => handleIconClick('tree')}
+            style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
+            onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
+            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+          />
+          <img
+            src={getIconImage('conversation')}
+            alt="Bottom Conversation"
+            className="w-9 h-9 cursor-pointer"
+            onClick={() => handleIconClick('conversation')}
+            style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
+            onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
+            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+          />
+          <img
+            src={getIconImage('campaign')}
+            alt="Bottom Campaign"
+            className="w-9 h-9 cursor-pointer"
+            onClick={() => handleIconClick('campaign')}
+            style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
+            onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
+            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+          />
+          <img
+            src={getIconImage('market')}
+            alt="Bottom Market"
+            className="w-9 h-9 cursor-pointer"
+            onClick={() => handleIconClick('market')}
+            style={{ marginLeft: '273px', transition: 'transform 0.2s' }}
+            onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
+            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+          />
+        </div>
+      </footer>
+    </>
   );
 }
 

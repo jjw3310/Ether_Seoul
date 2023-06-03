@@ -3,6 +3,7 @@ export const TRE_CONT_ADDRESS = "0x9c1c3460e99E17B5A09D7173dca00a495F6209C0";
 export const FER_CONT_ADDRESS = "0x4593F10cABcF8673b815e3BB3302B1ff22D4d798";
 export const ECO_CONT_ADDRESS = "0x80D954b2960F8aC4f726689e0388B58e3BF5b110";
 export const USE_CONT_ADDRESS = "0xaB41A55d96ca23c0f12A6EF907d24DF09aE9CA52";
+export const COM_CONT_ADDRESS = "0x8A24d96bd4638C55aE34bAdd3e821970Ccfc1F25";
 
 export const BERRY_ABI = [
   {
@@ -2286,6 +2287,429 @@ export const USER_ABI = [
     ],
     name: "setUser",
     outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
+
+export const COMMUNITY_ABI = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_addr",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_ecoin",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_kind",
+        type: "uint256",
+      },
+      {
+        internalType: "string",
+        name: "_content",
+        type: "string",
+      },
+      {
+        internalType: "string[]",
+        name: "_imgUrls",
+        type: "string[]",
+      },
+      {
+        internalType: "string[]",
+        name: "_hashTags",
+        type: "string[]",
+      },
+      {
+        internalType: "uint256",
+        name: "_writeDate",
+        type: "uint256",
+      },
+    ],
+    name: "createPost",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_myId",
+        type: "uint256",
+      },
+    ],
+    name: "deletePost",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "commentId",
+        type: "uint256",
+      },
+    ],
+    name: "deltetePostComment",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getAllPosts",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "id",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "myId",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "writer",
+            type: "address",
+          },
+          {
+            internalType: "enum Community.PostKinds",
+            name: "kind",
+            type: "uint8",
+          },
+          {
+            internalType: "string",
+            name: "content",
+            type: "string",
+          },
+          {
+            internalType: "string[]",
+            name: "imgUrl",
+            type: "string[]",
+          },
+          {
+            internalType: "string[]",
+            name: "hashtag",
+            type: "string[]",
+          },
+          {
+            internalType: "uint256",
+            name: "writeDate",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "updateDate",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "deleteCheck",
+            type: "bool",
+          },
+        ],
+        internalType: "struct Community.Post[]",
+        name: "",
+        type: "tuple[]",
+      },
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "addr",
+            type: "address",
+          },
+          {
+            internalType: "string",
+            name: "name",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "imgUrl",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "level",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct User.user[]",
+        name: "",
+        type: "tuple[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+    ],
+    name: "getPostCommnet",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "postId",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "commentId",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "writer",
+            type: "address",
+          },
+          {
+            internalType: "string",
+            name: "contents",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "writeDate",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "deleteCheck",
+            type: "bool",
+          },
+        ],
+        internalType: "struct Community.Comment[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getUsersPosts",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "id",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "myId",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "writer",
+            type: "address",
+          },
+          {
+            internalType: "enum Community.PostKinds",
+            name: "kind",
+            type: "uint8",
+          },
+          {
+            internalType: "string",
+            name: "content",
+            type: "string",
+          },
+          {
+            internalType: "string[]",
+            name: "imgUrl",
+            type: "string[]",
+          },
+          {
+            internalType: "string[]",
+            name: "hashtag",
+            type: "string[]",
+          },
+          {
+            internalType: "uint256",
+            name: "writeDate",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "updateDate",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "deleteCheck",
+            type: "bool",
+          },
+        ],
+        internalType: "struct Community.Post[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+    ],
+    name: "isPushLike",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+    ],
+    name: "pushLike",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+      {
+        internalType: "string",
+        name: "_content",
+        type: "string",
+      },
+      {
+        internalType: "string[]",
+        name: "_imgUrls",
+        type: "string[]",
+      },
+      {
+        internalType: "string[]",
+        name: "_hashTags",
+        type: "string[]",
+      },
+      {
+        internalType: "uint256",
+        name: "_updateDate",
+        type: "uint256",
+      },
+    ],
+    name: "updatePost",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+      {
+        internalType: "string",
+        name: "_commentContent",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "_writeDate",
+        type: "uint256",
+      },
+    ],
+    name: "writeComment",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
     stateMutability: "nonpayable",
     type: "function",
   },

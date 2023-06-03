@@ -1,34 +1,13 @@
 import React from "react";
-import {
-  Box,
-  Flex,
-  Input,
-  InputGroup,
-  Button,
-  InputLeftElement,
-  Radio,
-  RadioGroup,
-  useRadio,
-  useRadioGroup,
-  HStack,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Avatar,
-  Heading,
-  Text,
-  IconButton,
-  Image,
-} from "@chakra-ui/react";
+import { Box, useRadio, useRadioGroup, HStack } from "@chakra-ui/react";
 
-export default function PostCategory() {
-  const options = ["All", "My tree NFT", "Eco-info", "Eco-lifestyle"];
+export default function PostCategory({ cate, setCate }) {
+  const options = ["My tree NFT", "Eco-info", "Eco-lifestyle", "All"];
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "framework",
     defaultValue: "react",
-    onChange: console.log,
+    onChange: (value) => setCate(options.indexOf(value)),
   });
 
   const group = getRootProps();

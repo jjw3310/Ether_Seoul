@@ -21,12 +21,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { create } from "ipfs-http-client";
-// const Client = require("ipfs-http-client");
-// const ipfs = Client.create({
-//   host: "localhost",
-//   port: "5001",
-//   protocol: "http",
-// });
+
 const ipfs = create({
   host: "localhost",
   port: "5002",
@@ -35,29 +30,44 @@ const ipfs = create({
 
 //const url = "https://ipfs.io/ipfs/";
 
-export default function CreatePostModal({ isOpen, onClose }) {
-  const [value, setValue] = useState("1");
+export default function CreatePostModal({
+  isOpen,
+  onClose,
+  contract,
+  account,
+}) {
+  const [category, setCategory] = useState("");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
 
-  async function uploadIpfs() {
-    try {
-      for (let i = 0; i < selectedFiles.length; i++) {
-        const file = selectedFiles[i];
-        const fileAdded = await ipfs.add(file);
-        const ipfsPath = fileAdded.path;
-        // setIpfsHash(ipfsPath);
-        console.log("IPFS path:", ipfsPath);
-      }
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
-  }
+  let [content, setContent] = useState("");
 
-  function outputcon() {
-    console.log(selectedFiles);
-    console.log(previewImages);
-  }
+  let handleInputChange = (e) => {
+    let inputValue = e.target.value;
+    setContent(inputValue);
+  };
+
+  const UploadPost = async () => {
+    //if (category === "" || content.length === 0) return;
+    let tmp = [];
+    for (let i = 0; i < selectedFiles.length; i++) {
+      const file = selectedFiles[i];
+      const fileAdded = await ipfs.add(file);
+      const ipfsPath = fileAdded.path;
+      tmp.push(ipfsPath);
+    }
+    const hashtags = content.match(/#[^\s#]*/g);
+    await contract.methods
+      .createPost(category, content, tmp, hashtags, getToday())
+      .send({ from: account })
+      .then((rst) => {
+        console.log(rst);
+        testClose();
+      });
+
+    // console.log(nameRef.current.value);
+    // console.log(contentRef.current.value);
+  };
 
   function testClose() {
     setSelectedFiles([]);
@@ -102,14 +112,16 @@ export default function CreatePostModal({ isOpen, onClose }) {
         <ModalCloseButton />
         <ModalBody pb={6}>
           {/* <Lorem count={2} /> */}
-          <RadioGroup onChange={setValue} value={value}>
+          <RadioGroup onChange={setCategory} value={category}>
             <Stack direction="row" justify={"center"} marginBottom={"3%"}>
-              <Radio value="1">My tree NFT</Radio>
-              <Radio value="2">Eco-info</Radio>
-              <Radio value="3">Eco-lifestyle</Radio>
+              <Radio value="0">My tree NFT</Radio>
+              <Radio value="1">Eco-info</Radio>
+              <Radio value="2">Eco-lifestyle</Radio>
             </Stack>
           </RadioGroup>
           <Textarea
+            value={content}
+            onChange={handleInputChange}
             placeholder="Create and publish a post 
           #TMI #NFT"
           />
@@ -135,7 +147,7 @@ export default function CreatePostModal({ isOpen, onClose }) {
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={uploadIpfs} colorScheme="blue" mr={3}>
+          <Button onClick={UploadPost} colorScheme="blue" mr={3}>
             Save
           </Button>
           <Button onClick={testClose}>Cancel</Button>
@@ -144,3 +156,12 @@ export default function CreatePostModal({ isOpen, onClose }) {
     </Modal>
   );
 }
+
+const getToday = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = ("0" + (1 + date.getMonth())).slice(-2);
+  const day = ("0" + date.getDate()).slice(-2);
+
+  return year + month + day;
+};

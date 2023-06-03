@@ -60,7 +60,7 @@ export default function Community({ account }) {
       COM_CONT_ADDRESS
     );
 
-    setContract(contract);
+    setContract(contractCommunity);
 
     const getAllPosts = async () => {
       await contractCommunity.methods
@@ -150,7 +150,12 @@ export default function Community({ account }) {
           Create Post{" "}
         </Button>
 
-        <CreatePostModal isOpen={isOpen} onClose={onClose} />
+        <CreatePostModal
+          isOpen={isOpen}
+          onClose={onClose}
+          contract={contract}
+          account={account}
+        />
       </Flex>
       <PostCategory />
       {/* <PostCard /> */}

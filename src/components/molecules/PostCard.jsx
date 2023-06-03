@@ -57,7 +57,11 @@ export default function PostCard({ post }) {
           )}
         </Text>
       </CardBody>
-      <Image objectFit="cover" src={post.imgUrl[0]} alt="Chakra UI" />
+      <Image
+        objectFit="cover"
+        src={"https://ipfs.io/ipfs/" + post.imgUrl[0]}
+        alt="Chakra UI"
+      />
 
       <CardFooter
         justify="center"

@@ -17,7 +17,8 @@ function App() {
   const [userNickName, setUserNickname] = useState();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentPage, setCurrentPage] = useState();
-  const { userContract, marketContract, getContracts } = useWeb3();
+  const { userContract, marketContract, berryContract, getContracts } =
+    useWeb3();
   // const { marketContract, getContracts } = useWeb3();
   useEffect(() => {
     const handleNickname = async () => {
@@ -89,7 +90,14 @@ function App() {
                   <Route path="/community" element={<Community />} />
                   <Route
                     path="/market"
-                    element={<Market marketContract={marketContract} />}
+                    element={
+                      <Market
+                        marketContract={marketContract}
+                        userContract={userContract}
+                        berryContract={berryContract}
+                        account={account}
+                      />
+                    }
                   />
                   <Route path="/marketItemset" element={<MarketItemset />} />
                 </Routes>

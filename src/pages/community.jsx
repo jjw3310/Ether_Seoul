@@ -5,6 +5,7 @@ import CreatePostModal from "@components/molecules/CreatePostModal";
 import { ethers } from "ethers";
 import { COM_CONT_ADDRESS, COMMUNITY_ABI } from "../web3.config";
 import Web3 from "web3";
+import { sub2GreenColor } from "@components/atoms/Colors";
 
 import { useState, useEffect } from "react";
 import {
@@ -130,7 +131,7 @@ export default function Community({ account }) {
       alignItems={"center"}
       gap={"20px"}
       marginTop={"3%"}
-      bg={"black"}
+      bg={sub2GreenColor}
     >
       <Flex gap={"10px"}>
         <InputGroup w={"60%"}>

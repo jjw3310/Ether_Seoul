@@ -33,12 +33,19 @@ It is an E2E (Eco to Earn) project that raises awareness about environmental iss
 ## Team (A to Z)
 
 - 홍연 - Product Designer
-- 형준 - Designer
+
+  - Any planning and writing tools
+
+- IMHYEONGJUN - Designer
+  - Figma
+    UX / UI Design , Project prototype
+  - illustrator
+    Logo , icon , Graphic Design
 - JeongHo - Developer
   - Smart Contract ( solidity )
     - Metamask, Hardhat, Infuria, ReactJs, Tailwind CSS, CometChat, Solidity, EthersJs
   - React ( Javascript )
-- 지민 - Developer
+- JIMIN - Developer
   - Smart Contract ( Solidity )
     - Community
   - React ( Javascript )

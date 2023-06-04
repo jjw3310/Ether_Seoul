@@ -1,7 +1,7 @@
 export const BER_CONT_ADDRESS = "0x3b243375cB7e3c6C1fd85868e83812c961e50A89";
 export const TRE_CONT_ADDRESS = "0x726666d5b81f4BbBaAbc0899E37B768cDFf6c5b4";
 export const USE_CONT_ADDRESS = "0x7Ac3917B77BAF7D42C6ea8484cbEeEBDA3c0e504";
-export const COM_CONT_ADDRESS = "0x4aA01BBC08859603567f2796d076BC620AC9455b";
+export const COM_CONT_ADDRESS = "0xB8E8960cB8Bdbe78282581a02f79b7C2159737AA";
 // export const FER_CONT_ADDRESS = "0x3bf7ef9A7FD6242Aaa3b788E25cbcE40F2fFf08d";
 // export const ECO_CONT_ADDRESS = "0xD0de5DC272831d14357c4E7d18b6c472Ea9978bE";
 
@@ -2941,12 +2941,7 @@ export const COMMUNITY_ABI = [
     inputs: [
       {
         internalType: "address",
-        name: "_addr",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_ecoin",
+        name: "_user",
         type: "address",
       },
     ],
@@ -3125,6 +3120,11 @@ export const COMMUNITY_ABI = [
         internalType: "uint256[]",
         name: "",
         type: "uint256[]",
+      },
+      {
+        internalType: "bool[]",
+        name: "",
+        type: "bool[]",
       },
     ],
     stateMutability: "view",

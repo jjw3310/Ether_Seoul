@@ -16,7 +16,7 @@ const Projects = ({ projects }) => {
   }, [projects, end]);
 
   return (
-<div className="flex flex-col px-6 " style={{ backgroundColor: "#F0F1F2", paddingTop: "20px", paddingBottom: "100px" }}>
+<div className="flex flex-col px-6 pb-10" style={{ backgroundColor: "#F0F1F2", paddingTop: "20px", paddingBottom: "100px" }}>
 
       <div className="flex justify-center items-center flex-wrap">
         {collection.map((project, i) => (
@@ -29,7 +29,7 @@ const Projects = ({ projects }) => {
           <button
             type="button"
             className="inline-block px-6 py-2.5 bg-green-600
-          text-white font-medium text-xs leading-tight uppercase
+          text-black font-medium text-xs leading-tight uppercase
           rounded-full shadow-md hover:bg-green-700"
             onClick={() => setEnd(end + count)}
           >

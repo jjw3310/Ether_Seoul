@@ -174,23 +174,19 @@ const CreateProject = () => {
 
           <button
   type="submit"
-  className="inline-flex items-center px-6 py-4 bg-green-600
-    text-white font-medium text-md leading-tight
+  className="inline-flex items-center px-4 py-2 bg-green-600
+    text-white font-medium text-sm leading-tight
     rounded-full shadow-md hover:bg-green-700 mt-5"
   style={{ borderRadius: "10px" }}
-
 >
   <img
     src={CreateCampaignIcon}
     alt="Icon"
-    className="w-6 h-6 mr-2"
-
+    className="w-4 h-6 mr-2"
   />
-  <div   style={{ marginLeft: '240px'}}
-  >
-  Create Campaign
-  </div>
+  <span className="ml-20">Create Campaign</span>
 </button>
+
 
         </form>
       </div>

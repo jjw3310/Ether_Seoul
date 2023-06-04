@@ -25,7 +25,7 @@ export default function MyPage({
           .getBalanceOfUnmintedTree(account)
           .call();
         setMyTrees(resultTree);
-
+        console.log("!!!!!", resultTree);
         const cnt = await treeContract.methods.balanceOf(account).call();
         console.log("cnt : ", cnt);
         if (cnt === "0") return;
@@ -33,7 +33,7 @@ export default function MyPage({
           .tokenOfOwner(account)
           .call();
         if (myTrees) {
-          setMyTrees(myTrees.concat(mintedTree));
+          setMyTrees([...resultTree, ...mintedTree]);
         } else {
           setMyTrees(mintedTree);
         }
@@ -60,7 +60,7 @@ export default function MyPage({
         <>
           <Box>{balance}</Box>
           <Flex direction={"column"}>
-            {myTrees.map((v, i) => {
+            {myTrees.map((i, v) => {
               return (
                 <TreeBox
                   key={i}

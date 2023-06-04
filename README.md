@@ -39,13 +39,21 @@ It is an E2E (Eco to Earn) project that raises awareness about environmental iss
     - Metamask, Hardhat, Infuria, ReactJs, Tailwind CSS, CometChat, Solidity, EthersJs
   - React ( Javascript )
 - 지민 - Developer
+  - Smart Contract ( Solidity )
+    - Community
+  - React ( Javascript )
+    - Community
 - JoungYun - Developer
   - Smart Contract ( Solidity )
     - User, Ecoin, Berry, Tree, Fertilizer
   - React ( Javascript )
     - My Page
   - README.md
-- 지원 - Developer
+- JIWON - Developer
+  - Smart Contract ( Solidity )
+    - Market contract
+  - React ( Javascript )
+  - Developing Management, Market, git-flow, EthersJs, css(tailwind, global-style, chakra-ui)
 
 ## Road Map
 
@@ -156,8 +164,8 @@ function burnBerry(address owner, string memory _berryName, uint256 _amount)
 function balanceAllOf(address _addr) returns(uint256[] memory)
 ```
 
-
 ### Installation
+
 - npm install crypto-browserify
 - npm install stream-browserify
 - npm install stream-http
@@ -170,4 +178,46 @@ function balanceAllOf(address _addr) returns(uint256[] memory)
 - npm install @tailwindcss/forms
 - npm install tailwindcss
 - npm install ethers
-- 
+-
+
+```solidity
+struct Post {
+    uint id;
+    uint myId;
+    address writer;
+    PostKinds kind;
+    string content;
+    string[] imgUrl;
+    string[] hashtag;
+    uint writeDate;
+    uint updateDate;
+    bool deleteCheck;
+}
+//Manage all posts
+Post[] allPost;
+//post kind
+enum PostKinds { myTreeNft, ecoInfo, ecoLifeStyle }
+//user likes check
+mapping(uint => mapping(address => bool)) likeCheck;
+//is user recieve rewards?
+mapping(address => mapping(uint => mapping(uint => bool))) isReward;
+//posts like (index == id)
+uint[] postLikeCnt;
+//posts conmment (index == id)
+uint[] postCommentCnt;
+//posts comments
+mapping(uint => Comment[]) commentlist;
+// manage user's posts
+mapping(address => Post[]) myPosts;
+
+
+function getAllPosts() public view returns(Post[] memory, User.user[] memory, uint[] memory, uint[] memory, bool[] memory)
+function createPost(uint _kind, string memory _content, string[] memory _imgUrls, string[] memory _hashTags, uint _writeDate) public returns (uint256)
+function updatePost(uint _id, string memory _content, string[] memory _imgUrls, string[] memory _hashTags, uint _updateDate) public returns (uint)
+function deletePost(uint _id, uint _myId) public
+function getUsersPosts() public view returns(Post[] memory)
+function pushLike(uint _id) public returns(uint256)
+function isPushLike(uint _id) public view returns(bool)
+function getPostCommnet(uint _id) public view returns (Comment[] memory)
+function deltetePostComment(uint _id, uint commentId) public
+```

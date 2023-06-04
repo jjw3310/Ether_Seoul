@@ -37,6 +37,7 @@ code {
 }
 .full-h {
   @apply h-screen bg-[#F0F1F2];
+  height: 105vh;
 }
 .market-background {
   @apply bg-[#F0F1F2];

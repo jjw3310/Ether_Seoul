@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity >=0.7.0 <0.9.0;
+pragma solidity ^0.8.12;
 
 import "./User.sol";
-import "./Tree.sol";
-import "./Ecoin.sol";
 
 contract Community {
     // 각 리워드 좋아요 기준 개수 
@@ -15,13 +13,9 @@ contract Community {
     uint constant Thousand  = 1000;
 
     User userContract;
-    Tree treeContract;
-    Ecoin ecoinContract;
 
-    constructor(address _addr, address _tree, address _ecoin) {
-        userContract = User(_addr);
-        treeContract = Tree(_tree);
-        ecoinContract = Ecoin(_ecoin);
+    constructor(address _user) {
+        userContract = User(_user);
     }
 
     // 게시글 구조체
@@ -36,6 +30,7 @@ contract Community {
         uint writeDate;     // 작성일자 
         uint updateDate;    // 수정일자 
         bool deleteCheck;   // 삭제 여부 
+        //mapping(uint => bool) isReward;  //리워드 받은적 있는지 
     }
 
     // 게시글 종류 
@@ -81,20 +76,22 @@ contract Community {
 
 
     //모든 게시물 Read
-    function getAllPosts() public view returns(Post[] memory, User.user[] memory, uint[] memory, uint[] memory) {
+    function getAllPosts() public view returns(Post[] memory, User.user[] memory, uint[] memory, uint[] memory, bool[] memory) {
         //return allPost; 
-        // TODO : 함수 실행시킨 유저 각 포스트 좋아요 눌렀는지 Bool 배열도 리턴..?
-        Post[] memory tmp = allPost;
+        // TODO : 유저 정보는 어떻게 가져올것인지?, 좋아요 개수도 어떻게 가져올건지 
+        Post[] memory tmp = allPost;        
         uint len = allPost.length;
+        bool[] memory tmpBool = new bool[](len);
         address tmpUser;
         User.user[] memory tmpUsers = new User.user[](len);
         for(uint i=0;i<len;i++) {
             tmpUser = allPost[i].writer;
             tmpUsers[i] = userContract.getUser(tmpUser); //allPost의 index에 맞춰 User배열 생성 
-            // TODO : 함수 실행시킨 유저 각 포스트 좋아요 눌렀는지 Bool 배열도 리턴..?
+            if(likeCheck[i][msg.sender]) tmpBool[i]=true;
+            else tmpBool[i]=false;
         }
-            
-        return (tmp, tmpUsers, postLikeCnt, postCommentCnt); // 포스트, 유저, 포스트 좋아요 수, 포스트 댓글 수 모두 같은 index로 배열로 return 
+ 
+        return (tmp, tmpUsers, postLikeCnt, postCommentCnt, tmpBool); // 포스트, 유저, 포스트 좋아요 수, 포스트 댓글 수 모두 같은 index로 배열로 return 
     }
 
     // 게시물 Create
@@ -172,34 +169,36 @@ contract Community {
         Post memory tmpPost = allPost[_id];
         address rewardMan = tmpPost.writer; //작성자 주소 
 
+        //// 리워드 받은적 있는지 (유저 -> 포스트ID -> 좋아요 개수 -> bool)
+        //mapping(address => mapping(uint => mapping(uint => bool))) isReward; 
         if (likeCount == ten) {
             mintAmount = 4; // 리워드 에코인 수 
             if(!isReward[rewardMan][_id][ten]) { //10개 보상 받은적 없는지 체크 
-                ecoinContract.mint(rewardMan, mintAmount);
+                userContract.berryContract().mintBerry(msg.sender, "GREENAPPLE", mintAmount);
                 isReward[rewardMan][_id][ten] = true;
             }
         } else if (likeCount == fifty) {
             mintAmount = 6; // 리워드 에코인 수 
             if(!isReward[rewardMan][_id][fifty]) {  //50개 보상 받은적 없는지 체크 
-                ecoinContract.mint(rewardMan, mintAmount); // 해당 리워드 개수 작성자에게 민팅 
+                userContract.berryContract().mintBerry(msg.sender, "GREENAPPLE", mintAmount);
                 isReward[rewardMan][_id][fifty] = true; // 보상 전적 업데이트 
             }
         } else if (likeCount == Hundred) {
             mintAmount = 10; // 리워드 에코인 수 
             if(!isReward[rewardMan][_id][Hundred]) { //100개 보상 받은적 없는지 체크 
-                ecoinContract.mint(rewardMan, mintAmount); // 해당 리워드 개수 작성자에게 민팅 
+                userContract.berryContract().mintBerry(msg.sender, "GREENAPPLE", mintAmount); // 해당 리워드 개수 작성자에게 민팅 
                 isReward[rewardMan][_id][Hundred] = true; // 보상 전적 업데이트 
             }
         } else if (likeCount == Fivehundred) { 
             mintAmount = 20; // 리워드 에코인 수 
             if(!isReward[rewardMan][_id][Fivehundred]) { //500개 보상 받은적 없는지 체크 
-                ecoinContract.mint(rewardMan, mintAmount); // 해당 리워드 개수 작성자에게 민팅 
+                userContract.berryContract().mintBerry(msg.sender, "GREENAPPLE", mintAmount); // 해당 리워드 개수 작성자에게 민팅 
                 isReward[rewardMan][_id][Fivehundred] = true; // 보상 전적 업데이트 
             }
         } else if (likeCount == Thousand) { 
             mintAmount = 100; // 리워드 에코인 수 
             if(!isReward[rewardMan][_id][Thousand]) { //1000개 보상 받은적 없는지 체크 
-                ecoinContract.mint(rewardMan, mintAmount); // 해당 리워드 개수 작성자에게 민팅 
+                userContract.berryContract().mintBerry(msg.sender, "GREENAPPLE", mintAmount); // 해당 리워드 개수 작성자에게 민팅 
                 isReward[rewardMan][_id][Thousand] = true; // 보상 전적 업데이트 
             }
         }        

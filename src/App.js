@@ -4,7 +4,7 @@ import Main from "./pages/main";
 import Customizing from "./pages/customizing";
 import Header from "./components/Header";
 import Community from "./pages/community";
-import CrowdFunding from "./pages/CrowdFunding"
+import CrowdFunding from "./pages/CrowdFunding";
 import { useEffect, useState } from "react";
 import LoginForm from "@components/molecules/LoginForm";
 // import Market from "./pages/market";
@@ -12,18 +12,19 @@ import SignupForm from "@components/molecules/SignUpForm";
 import { useWeb3 } from "@hooks/useWallet";
 import Market from "./pages/market";
 import MarketItemset from "./pages/marketItemset";
-import Home from './views/Home'
-import Project from './views/Project'
-import { isWallectConnected } from './services/blockchain'
-import { ToastContainer } from 'react-toastify'
-import Footer from './components/Footer'
+import Home from "./views/Home";
+import Project from "./views/Project";
+import { isWallectConnected } from "./services/blockchain";
+import { ToastContainer } from "react-toastify";
+import Footer from "./components/Footer";
 
 function App() {
   const [account, setAccount] = useState();
-  const [userNickName, setUserNickname] = useState();
+  const [userNickName, setUserNickname] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentPage, setCurrentPage] = useState();
-  const { userContract, marketContract, getContracts } = useWeb3();
+  const { userContract, marketContract, berryContract, getContracts } =
+    useWeb3();
   // const { marketContract, getContracts } = useWeb3();
   useEffect(() => {
     const handleNickname = async () => {
@@ -92,12 +93,22 @@ function App() {
                   />
                   <Route path="/:tokenId" element={<Customizing />} />
                   <Route path="/login" element={<LoginForm />} />
-                  <Route path="/community" element={<Community account={account} />} />
+                  <Route
+                    path="/community"
+                    element={<Community account={account} />}
+                  />
                   <Route
                     path="/market"
-                    element={<Market marketContract={marketContract} />}
+                    element={
+                      <Market
+                        marketContract={marketContract}
+                        userContract={userContract}
+                        berryContract={berryContract}
+                        account={account}
+                      />
+                    }
                   />
-                  <Route path="/crowdFunding" element={< CrowdFunding/>} />
+                  <Route path="/crowdFunding" element={<CrowdFunding />} />
                   <Route path="/marketItemset" element={<MarketItemset />} />
                   <Route path="/projects" element={<Home />} />
                   <Route path="/projects/:id" element={<Project />} />
@@ -114,18 +125,18 @@ function App() {
           </div>
         </Flex>
         <ToastContainer
-        position="bottom-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-      <Footer />
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        <Footer />
       </ChakraProvider>
     </BrowserRouter>
   );

@@ -13,7 +13,7 @@ module.exports = {
   },
   networks: {
     mumbai: {
-      url: "https://polygon-mumbai.g.alchemy.com/v2/_e8jasy7LBmZv2YivYL3DV1NVnlRNzF2",
+      url: "https://polygon-mumbai.g.alchemy.com/v2/X5e8mhXZ3jALNrZ4LoliSv6ct9ESRN33", //https://polygon-mumbai.g.alchemy.com/v2/_e8jasy7LBmZv2YivYL3DV1NVnlRNzF2
       accounts: [process.env.DEPLOY_WALLET_PVK],
     },
     aurora_testnet: {

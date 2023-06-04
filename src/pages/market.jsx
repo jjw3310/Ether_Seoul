@@ -70,12 +70,13 @@ const Market = ({ userContract, berryContract, marketContract, account }) => {
   };
 
   const getBerryBal = async () => {
-    const result = await berryContract.balanceAllOf(account);
+    const result = await berryContract.methods.balanceAllOf(account).call();
     console.log("BAL :", result);
+    setBerryBal(result[0]);
   };
   useEffect(() => {
     getBerryBal();
-  }, []);
+  }, [account]);
   useEffect(() => {
     onClickGetItems();
   }, []);
@@ -98,7 +99,7 @@ const Market = ({ userContract, berryContract, marketContract, account }) => {
           <div className="apple">
             <Image className="" src={REDAPPLE} alt="" />
             <div className="apple-balance" style={{ color: "black" }}>
-              27
+              {berryBal}
             </div>
           </div>
         </div>

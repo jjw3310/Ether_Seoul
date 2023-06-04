@@ -18,6 +18,7 @@
     "https-browserify": "^1.0.0",
     "ipfs-daemon": "^0.16.1",
     "ipfs-http-client": "^60.0.1",
+    "moment": "^2.29.4",
     "os-browserify": "^0.3.0",
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",

@@ -72,41 +72,29 @@ const Hero = () => {
           </button>
         </div>
 
-        <div
-          className="flex justify-center items-center mt-10 text-black"
-          style={{ backgroundColor: "#F0F1F2" }}
+        <div className="flex justify-center items-center mt-10 text-black" style={{ backgroundColor: "#F0F1F2", width: "430px" }}>
+  <div className="flex justify-center items-center mt-10 space-x-4">
+    <div className="flex flex-col justify-center items-center h-24 w-24 border shadow-md hover:shadow-lg transition duration-300" style={{ backgroundColor: "white" }}>
+      <span className="text-sm font-bold text-green-900 leading-5">
+        {stats?.totalProjects || 0}
+      </span>
+      <span className="mt-1 text-xs">Projects</span>
+    </div>
+    <div className="flex flex-col justify-center items-center h-24 w-24 border shadow-md hover:shadow-lg transition duration-300" style={{ backgroundColor: "white" }}>
+      <span className="text-sm font-bold text-green-900 leading-5">
+        {stats?.totalBacking || 0}
+      </span>
+      <span className="mt-1 text-xs">Backings</span>
+    </div>
+    <div className="flex flex-col justify-center items-center h-24 w-24 border shadow-md hover:shadow-lg transition duration-300" style={{ backgroundColor: "white" }}>
+      <span className="text-sm font-bold text-green-900 leading-5">
+        {stats?.totalDonations || 0} ETH
+      </span>
+      <span className="mt-1 text-xs">Donated</span>
+    </div>
+  </div>
+</div>
 
-        >
-          <div className="flex justify-center items-center mt-10 space-x-10">
-            <div
-              className="flex flex-col justify-center items-center h-60 w-40 border shadow-md hover:shadow-lg transition duration-300"
-              style={{ backgroundColor: "white" }}
-            >
-              <span className="text-lg font-bold text-green-900 leading-5">
-                {stats?.totalProjects || 0}
-              </span>
-              <span className="mt-2">Projects</span>
-            </div>
-            <div
-              className="flex flex-col justify-center items-center h-60 w-40 border shadow-md hover:shadow-lg transition duration-300"
-              style={{ backgroundColor: "white" }}
-            >
-              <span className="text-lg font-bold text-green-900 leading-5">
-                {stats?.totalBacking || 0}
-              </span>
-              <span className="mt-2">Backings</span>
-            </div>
-            <div
-              className="flex flex-col justify-center items-center h-60 w-40 border shadow-md hover:shadow-lg transition duration-300"
-              style={{ backgroundColor: "white" }}
-            >
-              <span className="text-lg font-bold text-green-900 leading-5">
-                {stats?.totalDonations || 0} ETH
-              </span>
-              <span className="mt-2">Donated</span>
-            </div>
-          </div>
-        </div>
     </>
   );
 };

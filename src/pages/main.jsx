@@ -1,5 +1,4 @@
 import { Box, Flex } from "@chakra-ui/react";
-import TreeBox from "@components/molecules/TreeBox";
 import { useWeb3 } from "@hooks/useWallet";
 import { useEffect, useState } from "react";
 import MyPage from "./myPage";
@@ -30,16 +29,26 @@ export default function Main({ account }) {
         const resultUser = await userContract.methods.getUser(account).call();
         setUser(resultUser);
       }
-      if (treeContract) {
-        const resultTree = await treeContract.methods
-          .getBalanceOfUnmintedTree(account)
-          .call();
-        console.log("resultTree : ", resultTree);
-        await setMyTrees(resultTree);
-        const mintedTree = await treeContract.methods.balanceOf(account).call();
-        console.log("mintedTree :", mintedTree);
-        await setMyTrees(...mintedTree);
-      }
+      // if (treeContract) {
+      //   const resultTree = await treeContract.methods
+      //     .getBalanceOfUnmintedTree(account)
+      //     .call();
+      //   console.log("resultTree!! : ", resultTree);
+      //   setMyTrees(resultTree);
+      //   const mintedTree = await treeContract.methods.balanceOf(account).call();
+      //   if (mintedTree) {
+      //     try {
+      //       setMyTrees(resultTree.push(mintedTree));
+      //     } catch {
+      //       let arr = [...resultTree, ...mintedTree];
+      //       setMyTrees(arr);
+      //     }
+      //     console.log("mintedTree :", mintedTree);
+      //     console.log("COMBINED : ", [...resultTree, mintedTree]);
+      //     // console.log("COMBINED : ", [...myTrees,...mintedTree);
+      //     setMyTrees([...resultTree, mintedTree]);
+      //   }
+      // }
     },
     [userContract]
   );

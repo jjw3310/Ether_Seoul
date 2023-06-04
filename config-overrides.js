@@ -2,6 +2,9 @@ const { override, addWebpackAlias, addBabelPlugins } = require("customize-cra");
 const path = require("path");
 const webpack = require('webpack');
 
+const crypto = require('crypto');
+global.crypto = crypto;
+
 module.exports = override(
   addWebpackAlias({
     "@components": path.resolve(__dirname, "src", "components"),

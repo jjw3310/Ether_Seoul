@@ -152,3 +152,19 @@ function burnBerry(address owner, string memory _berryName, uint256 _amount)
 // get balanceOf Every Berry
 function balanceAllOf(address _addr) returns(uint256[] memory)
 ```
+
+
+### Installation
+- npm install crypto-browserify
+- npm install stream-browserify
+- npm install stream-http
+- npm install https-browserify
+- npm install os-browserify
+- npm install react-toastify
+- npm install react-identicons
+- npm install react-moment
+- npm install react-hooks-global-state
+- npm install @tailwindcss/forms
+- npm install tailwindcss
+- npm install ethers
+- 

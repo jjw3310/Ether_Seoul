@@ -1,4 +1,4 @@
-import Identicons from 'react-identicons'
+// import Identicons from 'react-identicons'
 import { FaEthereum } from 'react-icons/fa'
 import {
   daysRemaining,
@@ -39,11 +39,11 @@ const ProjectDetails = ({ project }) => {
 
             <div className="flex justify-between items-center w-full pt-1">
               <div className="flex justify-start space-x-2">
-                <Identicons
+                {/* <Identicons
                   className="rounded-full shadow-md"
                   string={project?.owner}
                   size={15}
-                />
+                /> */}
                 {project?.owner ? (
                   <small className="text-gray-700">
                     {truncate(project?.owner, 4, 4, 11)}

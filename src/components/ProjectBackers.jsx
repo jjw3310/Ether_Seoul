@@ -1,5 +1,5 @@
 import { FaEthereum } from 'react-icons/fa'
-import Identicon from 'react-identicons'
+// import Identicon from 'react-identicons'
 import Moment from 'react-moment'
 import { truncate } from '../store'
 
@@ -60,14 +60,14 @@ const Backer = ({ backer }) => (
       className="text-sm font-light
       px-6 py-4 whitespace-nowrap"
     >
-      <div className="flex justify-start items-center space-x-2">
+      {/* <div className="flex justify-start items-center space-x-2">
         <Identicon
           className="h-10 w-10 object-contain rounded-full shadow-md"
           string={backer.owner}
           size={25}
         />
         <span>{truncate(backer.owner, 4, 4, 11)}</span>
-      </div>
+      </div> */}
     </td>
     <td
       className="text-sm font-light

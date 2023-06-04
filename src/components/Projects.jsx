@@ -1,4 +1,4 @@
-import Identicons from "react-identicons";
+// import Identicons from "react-identicons";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { truncate, daysRemaining } from "../store";
@@ -63,11 +63,11 @@ const ProjectCard = ({ project }) => {
 
           <div className="flex flex-col">
             <div className="flex justify-start space-x-2 items-center mb-3">
-              <Identicons
+              {/* <Identicons
                 className="rounded-full shadow-md"
                 string={project.owner}
                 size={15}
-              />
+              /> */}
               <small className="text-gray-700">
                 {truncate(project.owner, 4, 4, 11)}
               </small>

@@ -1,11 +1,11 @@
-import abi from '../abis/src/contracts/Genesis.sol/Genesis.json'
+import con from '../abis/src/contracts/Genesis.sol/Genesis.json'
 import address from '../abis/contractAddress.json'
 import { getGlobalState, setGlobalState } from '../store'
-import { ethers } from 'ethers'
+import Web3 from 'web3';
 
 const { ethereum } = window
 const contractAddress = address.address
-const contractAbi = abi.abi
+const contractAbi = con.abi
 let tx
 
 const connectWallet = async () => {
@@ -18,7 +18,7 @@ const connectWallet = async () => {
   }
 }
 
-const isWallectConnected = async () => {
+const isWalletConnected = async () => {
   try {
     if (!ethereum) return alert('Please install Metamask')
     const accounts = await ethereum.request({ method: 'eth_accounts' })
@@ -30,7 +30,7 @@ const isWallectConnected = async () => {
 
     window.ethereum.on('accountsChanged', async () => {
       setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
-      await isWallectConnected()
+      await isWalletConnected()
     })
 
     if (accounts.length) {
@@ -44,13 +44,12 @@ const isWallectConnected = async () => {
   }
 }
 
-const getEtheriumContract = async () => {
+const getEthereumContract = async () => {
   const connectedAccount = getGlobalState('connectedAccount')
 
   if (connectedAccount) {
-    const provider = new ethers.providers.Web3Provider(ethereum)
-    const signer = provider.getSigner()
-    const contract = new ethers.Contract(contractAddress, contractAbi, signer)
+    const web3 = new Web3(ethereum)
+    const contract = new web3.eth.Contract(contractAbi, contractAddress)
 
     return contract
   } else {
@@ -68,9 +67,9 @@ const createProject = async ({
   try {
     if (!ethereum) return alert('Please install Metamask')
 
-    const contract = await getEtheriumContract()
-    cost = ethers.utils.parseEther(cost)
-    tx = await contract.createProject(title, description, imageURL, cost, expiresAt)
+    const contract = await getEthereumContract()
+    cost = Web3.utils.toWei(cost.toString(), 'ether')
+    tx = await contract.methods.createProject(title, description, imageURL, cost, expiresAt).send({ from: ethereum.selectedAddress })
     await tx.wait()
     await loadProjects()
   } catch (error) {
@@ -88,8 +87,8 @@ const updateProject = async ({
   try {
     if (!ethereum) return alert('Please install Metamask')
 
-    const contract = await getEtheriumContract()
-    tx = await contract.updateProject(id, title, description, imageURL, expiresAt)
+    const contract = await getEthereumContract()
+    tx = await contract.methods.updateProject(id, title, description, imageURL, expiresAt).send({ from: ethereum.selectedAddress })
     await tx.wait()
     await loadProject(id)
   } catch (error) {
@@ -100,8 +99,8 @@ const updateProject = async ({
 const deleteProject = async (id) => {
   try {
     if (!ethereum) return alert('Please install Metamask')
-    const contract = await getEtheriumContract()
-    await contract.deleteProject(id)
+    const contract = await getEthereumContract()
+    await contract.methods.deleteProject(id).send({ from: ethereum.selectedAddress })
   } catch (error) {
     reportError(error)
   }
@@ -111,9 +110,9 @@ const loadProjects = async () => {
   try {
     if (!ethereum) return alert('Please install Metamask')
 
-    const contract = await getEtheriumContract()
-    const projects = await contract.getProjects()
-    const stats = await contract.stats()
+    const contract = await getEthereumContract()
+    const projects = await contract.methods.getProjects().call()
+    const stats = await contract.methods.stats().call()
 
     setGlobalState('stats', structureStats(stats))
     setGlobalState('projects', structuredProjects(projects))
@@ -125,8 +124,8 @@ const loadProjects = async () => {
 const loadProject = async (id) => {
   try {
     if (!ethereum) return alert('Please install Metamask')
-    const contract = await getEtheriumContract()
-    const project = await contract.getProject(id)
+    const contract = await getEthereumContract()
+    const project = await contract.methods.getProject(id).call()
 
     setGlobalState('project', structuredProjects([project])[0])
   } catch (error) {
@@ -139,14 +138,10 @@ const backProject = async (id, amount) => {
   try {
     if (!ethereum) return alert('Please install Metamask')
     const connectedAccount = getGlobalState('connectedAccount')
-    const contract = await getEtheriumContract()
-    amount = ethers.utils.parseEther(amount)
+    const contract = await getEthereumContract()
+    amount = Web3.utils.toWei(amount.toString(), 'ether')
 
-    tx = await contract.backProject(id, {
-      from: connectedAccount,
-      value: amount._hex,
-    })
-
+    tx = await contract.methods.backProject(id).send({ from: connectedAccount, value: amount })
     await tx.wait()
     await getBackers(id)
   } catch (error) {
@@ -157,8 +152,8 @@ const backProject = async (id, amount) => {
 const getBackers = async (id) => {
   try {
     if (!ethereum) return alert('Please install Metamask')
-    const contract = await getEtheriumContract()
-    let backers = await contract.getBackers(id)
+    const contract = await getEthereumContract()
+    let backers = await contract.methods.getBackers(id).call()
 
     setGlobalState('backers', structuredBackers(backers))
   } catch (error) {
@@ -170,12 +165,9 @@ const payoutProject = async (id) => {
   try {
     if (!ethereum) return alert('Please install Metamask')
     const connectedAccount = getGlobalState('connectedAccount')
-    const contract = await getEtheriumContract()
+    const contract = await getEthereumContract()
 
-    tx = await contract.payOutProject(id, {
-      from: connectedAccount,
-    })
-
+    tx = await contract.methods.payOutProject(id).send({ from: connectedAccount })
     await tx.wait()
     await getBackers(id)
   } catch (error) {
@@ -233,7 +225,7 @@ const reportError = (error) => {
 
 export {
   connectWallet,
-  isWallectConnected,
+  isWalletConnected,
   createProject,
   updateProject,
   deleteProject,

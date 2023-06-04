@@ -38,8 +38,8 @@ It is an E2E (Eco to Earn) project that raises awareness about environmental iss
 - 지민 - Developer
   - Smart Contract ( Solidity )
     - Community
-  - React ( Javascript )
-    - Community
+  - React ( Javascript, chakaraUI, ipfs-api, data optimization )
+    - Community, data optimization
 - JoungYun - Developer
   - Smart Contract ( Solidity )
     - User, Ecoin, Berry, Tree, Fertilizer

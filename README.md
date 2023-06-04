@@ -156,3 +156,45 @@ function burnBerry(address owner, string memory _berryName, uint256 _amount)
 // get balanceOf Every Berry
 function balanceAllOf(address _addr) returns(uint256[] memory)
 ```
+
+```solidity
+struct Post {
+    uint id;
+    uint myId;
+    address writer;
+    PostKinds kind;
+    string content;
+    string[] imgUrl;
+    string[] hashtag;
+    uint writeDate;
+    uint updateDate;
+    bool deleteCheck;
+}
+//Manage all posts
+Post[] allPost;
+//post kind
+enum PostKinds { myTreeNft, ecoInfo, ecoLifeStyle }
+//user likes check
+mapping(uint => mapping(address => bool)) likeCheck;
+//is user recieve rewards?
+mapping(address => mapping(uint => mapping(uint => bool))) isReward;
+//posts like (index == id)
+uint[] postLikeCnt;
+//posts conmment (index == id)
+uint[] postCommentCnt;
+//posts comments
+mapping(uint => Comment[]) commentlist;
+// manage user's posts
+mapping(address => Post[]) myPosts;
+
+
+function getAllPosts() public view returns(Post[] memory, User.user[] memory, uint[] memory, uint[] memory, bool[] memory)
+function createPost(uint _kind, string memory _content, string[] memory _imgUrls, string[] memory _hashTags, uint _writeDate) public returns (uint256)
+function updatePost(uint _id, string memory _content, string[] memory _imgUrls, string[] memory _hashTags, uint _updateDate) public returns (uint)
+function deletePost(uint _id, uint _myId) public
+function getUsersPosts() public view returns(Post[] memory)
+function pushLike(uint _id) public returns(uint256)
+function isPushLike(uint _id) public view returns(bool)
+function getPostCommnet(uint _id) public view returns (Comment[] memory)
+function deltetePostComment(uint _id, uint commentId) public
+```

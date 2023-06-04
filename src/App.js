@@ -14,7 +14,7 @@ import MarketItemset from "./pages/marketItemset";
 
 function App() {
   const [account, setAccount] = useState();
-  const [userNickName, setUserNickname] = useState();
+  const [userNickName, setUserNickname] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentPage, setCurrentPage] = useState();
   const { userContract, marketContract, berryContract, getContracts } =
@@ -87,7 +87,10 @@ function App() {
                   />
                   <Route path="/:tokenId" element={<Customizing />} />
                   <Route path="/login" element={<LoginForm />} />
-                  <Route path="/community" element={<Community />} />
+                  <Route
+                    path="/community"
+                    element={<Community account={account} />}
+                  />
                   <Route
                     path="/market"
                     element={

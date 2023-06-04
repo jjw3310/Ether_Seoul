@@ -36,6 +36,10 @@ It is an E2E (Eco to Earn) project that raises awareness about environmental iss
 - 형준 - Designer
 - 정호 - Developer
 - 지민 - Developer
+  - Smart Contract ( Solidity )
+    - Community
+  - React ( Javascript )
+    - Community
 - JoungYun - Developer
   - Smart Contract ( Solidity )
     - User, Ecoin, Berry, Tree, Fertilizer

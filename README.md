@@ -32,10 +32,10 @@ It is an E2E (Eco to Earn) project that raises awareness about environmental iss
 
 ## Team (A to Z)
 
-- 홍연 - Product Designer
-- 형준 - Designer
-- 정호 - Developer
-- 지민 - Developer
+- Marie - Product Designer
+- HyungJun - Designer
+- JungHo - Developer
+- JiMin - Developer
   - Smart Contract ( Solidity )
     - Community
   - React ( Javascript, chakaraUI, ipfs-api, data optimization )
@@ -46,7 +46,7 @@ It is an E2E (Eco to Earn) project that raises awareness about environmental iss
   - React ( Javascript )
     - My Page
   - README.md
-- 지원 - Developer
+- JiWon - Developer
 
 ## Road Map
 

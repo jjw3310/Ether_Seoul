@@ -34,7 +34,10 @@ It is an E2E (Eco to Earn) project that raises awareness about environmental iss
 
 - 홍연 - Product Designer
 - 형준 - Designer
-- 정호 - Developer
+- JeongHo - Developer
+  - Smart Contract ( solidity )
+    - Metamask, Hardhat, Infuria, ReactJs, Tailwind CSS, CometChat, Solidity, EthersJs
+  - React ( Javascript )
 - 지민 - Developer
 - JoungYun - Developer
   - Smart Contract ( Solidity )

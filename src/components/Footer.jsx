@@ -71,15 +71,17 @@ function Footer() {
       {/* 푸터 */}
       <footer className="fixed bottom-0 left-0 right-0 flex justify-between items-center p-5" style={{ backgroundColor: "#84A27E", zIndex: 999 }}>
         <div className="flex items-center space-x-16" style={{ flex: '1', maxWidth: '430px' }}>
-          <img
-            src={getIconImage('house')}
-            alt="Bottom House"
-            className="w-6 h-6 cursor-pointer"
-            onClick={() => handleIconClick('house')}
-            style={{ transition: 'transform 0.2s' }}
-            onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-          />
+          <Link to="/">
+            <img
+              src={getIconImage('house')}
+              alt="Bottom House"
+              className="w-6 h-6 cursor-pointer"
+              onClick={() => handleIconClick('house')}
+              style={{ transition: 'transform 0.2s' }}
+              onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
+              onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+            />
+          </Link>
           <img
             src={getIconImage('tree')}
             alt="Bottom Tree"
@@ -89,24 +91,28 @@ function Footer() {
             onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
             onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
           />
-          <img
-            src={getIconImage('conversation')}
-            alt="Bottom Conversation"
-            className="w-6 h-6 cursor-pointer"
-            onClick={() => handleIconClick('conversation')}
-            style={{ transition: 'transform 0.2s' }}
-            onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-          />
-          <img
-            src={getIconImage('campaign')}
-            alt="Bottom Campaign"
-            className="w-6 h-6 cursor-pointer"
-            onClick={() => handleIconClick('campaign')}
-            style={{ transition: 'transform 0.2s' }}
-            onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-          />
+          <Link to='/community'>
+            <img
+              src={getIconImage('conversation')}
+              alt="Bottom Conversation"
+              className="w-6 h-6 cursor-pointer"
+              onClick={() => handleIconClick('conversation')}
+              style={{ transition: 'transform 0.2s' }}
+              onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
+              onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+            />
+          </Link>
+          <Link to="./crowdFunding">
+            <img
+              src={getIconImage('campaign')}
+              alt="Bottom Campaign"
+              className="w-6 h-6 cursor-pointer"
+              onClick={() => handleIconClick('campaign')}
+              style={{ transition: 'transform 0.2s' }}
+              onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
+              onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+            />
+          </Link>
           <img
             src={getIconImage('market')}
             alt="Bottom Market"
@@ -116,7 +122,7 @@ function Footer() {
             onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
             onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
           />
-        </div>
+        </div>w
       </footer>
     </>
   );

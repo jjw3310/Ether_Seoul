@@ -4,6 +4,7 @@ import Main from "./pages/main";
 import Customizing from "./pages/customizing";
 import Header from "./components/Header";
 import Community from "./pages/community";
+import CrowdFunding from "./pages/CrowdFunding"
 import { useEffect, useState } from "react";
 import LoginForm from "@components/molecules/LoginForm";
 // import Market from "./pages/market";
@@ -91,14 +92,15 @@ function App() {
                   />
                   <Route path="/:tokenId" element={<Customizing />} />
                   <Route path="/login" element={<LoginForm />} />
-                  <Route path="/community" element={<Community />} />
+                  <Route path="/community" element={<Community account={account} />} />
                   <Route
                     path="/market"
                     element={<Market marketContract={marketContract} />}
                   />
+                  <Route path="/crowdFunding" element={< CrowdFunding/>} />
                   <Route path="/marketItemset" element={<MarketItemset />} />
                   <Route path="/projects" element={<Home />} />
-                   <Route path="/projects/:id" element={<Project />} />
+                  <Route path="/projects/:id" element={<Project />} />
                 </Routes>
                 <br />
                 <br />
@@ -111,7 +113,7 @@ function App() {
             )}
           </div>
         </Flex>
-         <ToastContainer
+        <ToastContainer
         position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}

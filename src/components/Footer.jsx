@@ -1,20 +1,20 @@
-import { TbBusinessplan } from 'react-icons/tb';
-import { Link, useNavigate } from 'react-router-dom';
-import { truncate, useGlobalState } from '../store';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { TbBusinessplan } from "react-icons/tb";
+import { Link, useNavigate } from "react-router-dom";
+import { truncate, useGlobalState } from "../store";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-import BottomHouse from '../assets/images/BottomHouse.png';
-import BottomTree from '../assets/images/BottomTree.png';
-import BottomConversation from '../assets/images/BottomConversation.png';
-import BottomCampaign from '../assets/images/BottomCampaign.png';
-import BottomMarket from '../assets/images/BottomMarket.png';
+import BottomHouse from "../assets/images/BottomHouse.png";
+import BottomTree from "../assets/images/BottomTree.png";
+import BottomConversation from "../assets/images/BottomConversation.png";
+import BottomCampaign from "../assets/images/BottomCampaign.png";
+import BottomMarket from "../assets/images/BottomMarket.png";
 
-import BottomHouseHover from '../assets/images/BottomHouseHover.png';
-import BottomTreeHover from '../assets/images/BottomTreeHover.png';
-import BottomConversationHover from '../assets/images/BottomConversationHover.png';
-import BottomCampaignHover from '../assets/images/BottomCampaignHover.png';
-import BottomMarketHover from '../assets/images/BottomMarketHover.png';
+import BottomHouseHover from "../assets/images/BottomHouseHover.png";
+import BottomTreeHover from "../assets/images/BottomTreeHover.png";
+import BottomConversationHover from "../assets/images/BottomConversationHover.png";
+import BottomCampaignHover from "../assets/images/BottomCampaignHover.png";
+import BottomMarketHover from "../assets/images/BottomMarketHover.png";
 
 function Footer() {
   const [selectedIcon, setSelectedIcon] = useState(null);
@@ -29,15 +29,15 @@ function Footer() {
     if (selectedIcon === iconName) {
       // Return hover state image for the selected icon
       switch (iconName) {
-        case 'house':
+        case "house":
           return BottomHouseHover;
-        case 'tree':
+        case "tree":
           return BottomTreeHover;
-        case 'conversation':
+        case "conversation":
           return BottomConversationHover;
-        case 'campaign':
+        case "campaign":
           return BottomCampaignHover;
-        case 'market':
+        case "market":
           return BottomMarketHover;
         default:
           return null;
@@ -45,15 +45,15 @@ function Footer() {
     } else {
       // Return normal state image for the icon
       switch (iconName) {
-        case 'house':
+        case "house":
           return BottomHouse;
-        case 'tree':
+        case "tree":
           return BottomTree;
-        case 'conversation':
+        case "conversation":
           return BottomConversation;
-        case 'campaign':
+        case "campaign":
           return BottomCampaign;
-        case 'market':
+        case "market":
           return BottomMarket;
         default:
           return null;
@@ -64,65 +64,69 @@ function Footer() {
   return (
     <>
       {/* 페이지 컨텐츠를 포함하는 레이아웃 요소 */}
-      <div className="page-content">
-        {/* 페이지 내용 */}
-      </div>
+      <div className="page-content">{/* 페이지 내용 */}</div>
 
       {/* 푸터 */}
-      <footer className="fixed bottom-0 left-0 right-0 flex justify-between items-center p-5" style={{ backgroundColor: "#84A27E", zIndex: 999 }}>
-        <div className="flex items-center space-x-16" style={{ flex: '1', maxWidth: '430px' }}>
+      <footer
+        className="fixed bottom-0 left-0 right-0 flex justify-between items-center p-5"
+        style={{ backgroundColor: "#84A27E", zIndex: 999 }}
+      >
+        <div
+          className="flex items-center space-x-16"
+          style={{ flex: "1", maxWidth: "430px" }}
+        >
           <Link to="/">
             <img
-              src={getIconImage('house')}
+              src={getIconImage("house")}
               alt="Bottom House"
               className="w-6 h-6 cursor-pointer"
-              onClick={() => handleIconClick('house')}
-              style={{ transition: 'transform 0.2s' }}
-              onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-              onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+              onClick={() => handleIconClick("house")}
+              style={{ transition: "transform 0.2s" }}
+              onMouseEnter={(e) => (e.target.style.transform = "scale(1.2)")}
+              onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
             />
           </Link>
           <img
-            src={getIconImage('tree')}
+            src={getIconImage("tree")}
             alt="Bottom Tree"
             className="w-6 h-6 cursor-pointer"
-            onClick={() => handleIconClick('tree')}
-            style={{ transition: 'transform 0.2s' }}
-            onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+            onClick={() => handleIconClick("tree")}
+            style={{ transition: "transform 0.2s" }}
+            onMouseEnter={(e) => (e.target.style.transform = "scale(1.2)")}
+            onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
           />
-          <Link to='/community'>
+          <Link to="/community">
             <img
-              src={getIconImage('conversation')}
+              src={getIconImage("conversation")}
               alt="Bottom Conversation"
               className="w-6 h-6 cursor-pointer"
-              onClick={() => handleIconClick('conversation')}
-              style={{ transition: 'transform 0.2s' }}
-              onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-              onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+              onClick={() => handleIconClick("conversation")}
+              style={{ transition: "transform 0.2s" }}
+              onMouseEnter={(e) => (e.target.style.transform = "scale(1.2)")}
+              onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
             />
           </Link>
           <Link to="./crowdFunding">
             <img
-              src={getIconImage('campaign')}
+              src={getIconImage("campaign")}
               alt="Bottom Campaign"
               className="w-6 h-6 cursor-pointer"
-              onClick={() => handleIconClick('campaign')}
-              style={{ transition: 'transform 0.2s' }}
-              onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-              onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+              onClick={() => handleIconClick("campaign")}
+              style={{ transition: "transform 0.2s" }}
+              onMouseEnter={(e) => (e.target.style.transform = "scale(1.2)")}
+              onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
             />
           </Link>
           <img
-            src={getIconImage('market')}
+            src={getIconImage("market")}
             alt="Bottom Market"
             className="w-6 h-6 cursor-pointer"
-            onClick={() => handleIconClick('market')}
-            style={{ transition: 'transform 0.2s' }}
-            onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'}
-            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+            onClick={() => handleIconClick("market")}
+            style={{ transition: "transform 0.2s" }}
+            onMouseEnter={(e) => (e.target.style.transform = "scale(1.2)")}
+            onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
           />
-        </div>w
+        </div>
       </footer>
     </>
   );

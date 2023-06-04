@@ -21,11 +21,11 @@ import { FaSearch } from "react-icons/fa";
 import Prev from "../assets/images/icon/Prev.png";
 import REDAPPLE from "../assets/images/berry/REDAPPLE.png";
 import banner from "../assets/images/banner/Frame 1.png";
-import itemsImg from "../assets/images/items/Frame 4.png";
+import itemsImg1 from "../assets/images/items/Frame 4.png";
 import itemsImg2 from "../assets/images/items/Frame 5.png";
 import itemsImg3 from "../assets/images/items/Frame 28.png";
 import itemsImg4 from "../assets/images/items/Frame 29.png";
-
+import { useState, useEffect } from "react";
 // import { ethers } from "ethers";
 // import { MARKET_ADDRESS, MARKET_ABI } from "../web3.config.js";
 // const Market = MARKET_ADDRESS;
@@ -36,20 +36,51 @@ import itemsImg4 from "../assets/images/items/Frame 29.png";
 //   const greeting = await contract.getItemList();
 //   alert(greeting);
 // };
-const Market = ({ marketContract }) => {
-  const onClickAccount = async () => {
+const Market = ({ userContract, berryContract, marketContract, account }) => {
+  const [item, setItem] = useState([]);
+  const [itemList, setItemList] = useState();
+  const [berryBal, setBerryBal] = useState();
+  const onClickGetItems = async () => {
     try {
       // const accounts = await window.ethereum.request({
       //   method: "eth_requestAccounts",
       // });
       // setAccount(accounts[0]);
-      const userResult = await marketContract.methods.getItemList().call();
-      console.log(userResult);
+      const ItemResult = await marketContract.methods.getItemList().call();
+      // const item = [1, 2, 3];
+      // const ItemResult = 0;
+      // const itemArray = [...item, ItemResult];
+      // const itemArray = [...item, ...ItemResult];
+      // console.log(itemArray); // [1, 2, 3, 0]
+      // console.log(ItemResult);
+      // itemArray.push(ItemResult);
+      setItem(ItemResult);
+      console.log(ItemResult[0].name);
+
       // await setNickname(userResult.name);
     } catch (error) {
       console.error(error);
     }
   };
+
+  const searchTitle = async (s) => {
+    const search = await marketContract.methods.searchKeyword(s).call();
+    setItemList(search);
+    console.log(search);
+  };
+
+  const getBerryBal = async () => {
+    const result = await berryContract.methods.balanceAllOf(account).call();
+    console.log("BAL :", result);
+    setBerryBal(result[0]);
+  };
+  useEffect(() => {
+    getBerryBal();
+  }, [account]);
+  useEffect(() => {
+    onClickGetItems();
+  }, []);
+
   return (
     <>
       <div className="full-h shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] market-background ">
@@ -67,7 +98,9 @@ const Market = ({ marketContract }) => {
         <div className="h-20 apple-wrapper">
           <div className="apple">
             <Image className="" src={REDAPPLE} alt="" />
-            <div className="apple-balance">67</div>
+            <div className="apple-balance" style={{ color: "black" }}>
+              {berryBal}
+            </div>
           </div>
         </div>
         <InputGroup className="searchBox">
@@ -90,7 +123,7 @@ const Market = ({ marketContract }) => {
             position={"absolute"}
             left={"58%"}
             // onClick={loadData}
-            onClick={onClickAccount}
+            onClick={onClickGetItems}
           >
             {" "}
             Search Item{" "}
@@ -100,7 +133,22 @@ const Market = ({ marketContract }) => {
           <Image src={banner} w={"100%"} className="banner_point" />
         </div>
         <div className="flex item">
-          <button>ll</button>
+          {item ? (
+            item.map((tem, i) => {
+              return (
+                <div key={i}>
+                  <Image src={itemsImg1} alt="" />
+                  {tem.name}sasas
+                </div>
+              );
+            })
+          ) : (
+            <div>검색결과가 업습니다!</div>
+          )}
+
+          {/* <div>
+            <Image src={itemsImg1} alt="" />
+          </div> */}
         </div>
 
         {/* <div>
